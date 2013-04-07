@@ -4,4 +4,4 @@ Members: Jeremy Bratton
 	 Andrey Kuklev
 	 Zian Wang
 	 Xiaoming Zhou
-Section Leader: Jorge
+Team Managers: Dylan and Jorge
