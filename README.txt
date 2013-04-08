@@ -1,7 +1,7 @@
 Team Name: Dungeon Masters
-Project: Final Project
+Project: Final Project (MUD)
 Members: Jeremy Bratton
 	 Andrey Kuklev
 	 Zian Wang
 	 Xiaoming Zhou
-Team Managers: Dylan and Jorge
+Project Managers: Dylan and Jorge
