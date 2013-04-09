@@ -8,5 +8,7 @@ import model.Targetable;
 public abstract class Item implements Targetable {
 	private String name;
 	private String description;
-	
+	public String activate(Living source){
+		source.addItem(this);
+	}
 }

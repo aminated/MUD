@@ -7,5 +7,19 @@ import model.Targetable;
 public abstract class Living implements Targetable {
 	private int base_hp;
 	private int hp;
+	private Room room;
+	public Room getRoom() {
+		return room;
+	}
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+	/**
+	 * Tells this Living entity something. May be ignored by MOBs. 
+	 * @param message A human-readable message. 
+	 */
+	public void sendMessage(String message){
+		
+	}
 	
 }

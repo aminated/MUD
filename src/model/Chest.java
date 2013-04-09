@@ -22,6 +22,7 @@ public class Chest implements Targetable {
 	@Override
 	public String getDescription() {
 		String description = "A chest containing: " + contentsToString();
+		return description;
 		// Remove last comma. 
 	}
 

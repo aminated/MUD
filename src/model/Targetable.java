@@ -20,15 +20,16 @@ public interface Targetable {
 	public String getDescription();
 	
 	/**
-	 * Called when a player activates the object. Changes object state and possibly player state. 
-	 * @return A brief message of what happened.
+	 * Called when a creature activates the object. Changes object state and possibly creature state.
+	 * To notify the creature of what happened in private, use source.sendMessage() 
+	 * @return A brief message of what happened, directed to everyone. 
 	 */
-	public String activate(Player source);
+	public String activate(Living source);
 	
 	/**
-	 * Called when a player uses an item on the object. 
-	 * @return A brief message of what happened.
+	 * Called when a creature uses an item on the object. 
+	 * @return A brief message of what happened, directed to everyone.
 	 */
-	public String useItem(Player source, Item tool);
+	public String useItem(Living source, Item tool);
 	
 }

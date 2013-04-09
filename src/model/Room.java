@@ -5,5 +5,4 @@ package model;
  * up to four exits.
  */
 public class Room {
-
 }
