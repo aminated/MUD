@@ -27,15 +27,15 @@ public class Chest implements Targetable {
 	}
 
 	@Override
-	public String activate(Player source) {
+	public String activate(Living source) {
 		for(Item item: items)
 		source.addItem(item);
 		items = new LinkedList<Item>();
-		return "You picked up: " + contentsToString();
+		return " picked up: " + contentsToString();
 	}
 
 	@Override
-	public String useItem(Player source, Item tool) {
+	public String useItem(Living source, Item tool) {
 		source.removeItem(tool);
 		items.add(tool);
 		return "You added " + tool.getName() + " to the chest.";

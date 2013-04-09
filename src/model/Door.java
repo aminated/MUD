@@ -10,6 +10,7 @@ public class Door implements Targetable {
 		destDir = d.turnBack();
 	}
 	/**
+	 * Specify the destination position explicitly. 
 	 * For when you want to ignore the rules of geometry. Portals, elevators and such. 
 	 * @param d The door's position in the destination room. 
 	 */
@@ -24,6 +25,7 @@ public class Door implements Targetable {
 	}
 	public String activate(Living creature){
 		creature.setRoom(dest);
-		creature.sendMessage("");
+		creature.sendMessage("You go through the door leading" + sourceDir.toString());
+		return creature.getName() + " left the room going " + sourceDir.toString();
 	}
 }

@@ -1,8 +1,37 @@
 package model;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * A Room is exactly that, a room. It can hold Living and Items and can have
  * up to four exits.
  */
 public class Room {
+	private List<Targetable> contents = new LinkedList<Targetable>();
+	private String description;
+	public Room(String description){
+		this.description = description;
+	}
+	public String describe(){
+		String output = description;
+		output += "The room has: \n";
+		for(Targetable thing: contents){
+			output += thing.getName() + ":" + thing.getDescription() + "\n";
+		}
+		return output;
+	}
+	public void add(Targetable thing){
+		contents.add(thing);
+	}
+	public void remove(Targetable thing){
+		contents.remove(thing);
+	}
+	public Targetable getByName(String name){
+		for(Targetable thing: contents){
+			if(thing.getName().equals(name))
+				return thing;
+		}
+		return null;
+	}
 }
