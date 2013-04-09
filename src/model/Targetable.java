@@ -1,3 +1,5 @@
+package model;
+import items.Item;
 /**
  * Something that exists in a room but may not be picked up. e.g. door, chest, button, living creatures. 
  * 
