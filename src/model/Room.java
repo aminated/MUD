@@ -34,4 +34,17 @@ public class Room {
 		}
 		return null;
 	}
+	/**
+	 * Notifies everyone in the room of something. 
+	 * @param message
+	 */
+	public void announce(String message){
+		for(Targetable thing: contents){
+			// TODO : Make this more typesafe. 
+			if(thing instanceof Living){
+				Living creature = (Living) thing;
+				creature.sendMessage(message);
+			}
+		}
+	}
 }
