@@ -19,6 +19,8 @@ public interface Targetable {
 	 */
 	public String getDescription();
 	
+	
+	
 	/**
 	 * Called when a creature activates the object. Changes object state and possibly creature state.
 	 * To notify the creature of what happened in private, use source.sendMessage() 
