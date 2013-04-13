@@ -1,5 +1,7 @@
 package items;
 
+import model.Living;
+
 
 /**
  * The WalkieTalkie allows the Player to interact in the chat Panel of the GUI.
@@ -7,5 +9,23 @@ package items;
  * chat Panel will be greyed out.
  */
 public class WalkieTalkie extends Item{
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String useItem(Living source, Item tool) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

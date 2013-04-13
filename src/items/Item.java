@@ -1,5 +1,6 @@
 package items;
 
+import model.Living;
 import model.Targetable;
 
 /**

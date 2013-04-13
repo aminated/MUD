@@ -21,5 +21,9 @@ public abstract class Living implements Targetable {
 	public void sendMessage(String message){
 		
 	}
+	public void addItem(Item item) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
