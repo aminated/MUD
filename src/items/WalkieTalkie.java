@@ -10,16 +10,11 @@ import model.Living;
  */
 public class WalkieTalkie extends Item{
 
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
-	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+	public WalkieTalkie(String name, String description, int weight) {
+		super(name, description, weight);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -27,5 +22,8 @@ public class WalkieTalkie extends Item{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
+	
 
 }

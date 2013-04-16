@@ -9,22 +9,8 @@ import model.Living;
  */
 public class Handgun extends Weapon {
 
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+	public Handgun(String name, String description, int weight) {
+		super(name, description, weight);
+		// TODO Auto-generated constructor stub
 	}
-
-	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String useItem(Living source, Item tool) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

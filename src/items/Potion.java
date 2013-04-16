@@ -4,13 +4,11 @@ import model.Living;
 
 
 /**
- * Binoculars allow someone to view any room nearby.
+ * A potion can heal the player 30HP who is injured.
  */
-public class Binoculars extends Item{
+public class Potion extends Item{
 
-	
-
-	public Binoculars(String name, String description, int weight) {
+	public Potion(String name, String description, int weight) {
 		super(name, description, weight);
 		// TODO Auto-generated constructor stub
 	}
