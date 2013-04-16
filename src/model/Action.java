@@ -10,9 +10,47 @@ import items.Item;
  *
  */
 public class Action {
+	/**
+	 * @return the source
+	 */
+	public Living getSource() {
+		return source;
+	}
+	/**
+	 * @param source the source to set
+	 */
+	public void setSource(Living source) {
+		this.source = source;
+	}
+	/**
+	 * @return the target
+	 */
+	public Targetable getTarget() {
+		return target;
+	}
+	/**
+	 * @param target the target to set
+	 */
+	public void setTarget(Targetable target) {
+		this.target = target;
+	}
+	/**
+	 * @return the tool
+	 */
+	public Item getTool() {
+		return tool;
+	}
+	/**
+	 * @param tool the tool to set
+	 */
+	public void setTool(Item tool) {
+		this.tool = tool;
+	}
 	private Living source;
 	private Targetable target;
 	private Item tool;
+	private boolean completed = false;
+	private String result; 
 	/**
 	 * Parse a command and create an action. 
 	 */
@@ -38,11 +76,21 @@ public class Action {
 		this.target = target;
 		this.tool = tool;
 	}
-	public String execute(){
-		if(tool != null)
-			return target.useItem(source, tool);
+	public String describe(){
+		if(completed)
+			return result;
 		else
-			return target.activate(source);
+			return "Action not yet executed";
+	}
+	public void execute(){
+		if(tool != null){
+			completed = true;
+			result =  target.useItem(source, tool);
+		}
+		else{
+			completed = false;
+			result = target.activate(source);
+		}
 	}
 	
 }

@@ -36,9 +36,9 @@ public class Room {
 	}
 	/**
 	 * Notifies everyone in the room of something. 
-	 * @param message
-	 */
-	public void announce(String message){
+	 * @param event An action that was executed by someone in the room. 
+ 	 */
+	public void announce(Action event){
 		for(Targetable thing: contents){
 			// TODO : Make this more typesafe. 
 			if(thing instanceof Living){
@@ -46,5 +46,5 @@ public class Room {
 				creature.sendMessage(message);
 			}
 		}
-	}
+	
 }
