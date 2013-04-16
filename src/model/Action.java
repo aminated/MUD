@@ -13,6 +13,8 @@ public class Action {
 	private Living source;
 	private Targetable target;
 	private Item tool;
+	private boolean completed = false;
+	private String result; 
 	/**
 	 * Parse a command and create an action. 
 	 */
@@ -38,11 +40,21 @@ public class Action {
 		this.target = target;
 		this.tool = tool;
 	}
-	public String execute(){
-		if(tool != null)
-			return target.useItem(source, tool);
+	public String describe(){
+		if(completed)
+			return result;
 		else
-			return target.activate(source);
+			return "Action not yet executed";
+	}
+	public void execute(){
+		if(tool != null){
+			completed = true;
+			result =  target.useItem(source, tool);
+		}
+		else{
+			completed = false;
+			result = target.activate(source);
+		}
 	}
 	
 }
