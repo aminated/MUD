@@ -13,6 +13,12 @@ import java.util.List;
 public abstract class Disposition {
 	protected List<Action> queue = new LinkedList<Action>();
 	protected Living owner;
+	protected void addAction(Action todo){
+		queue.add(todo);
+	}
+	public Disposition(Living owner){
+		this.owner = owner;
+	}
 	public boolean hasNext(){
 		return !queue.isEmpty();
 	}
@@ -21,6 +27,7 @@ public abstract class Disposition {
 			Action action = queue.get(0);
 			Room location = owner.getRoom();
 			action.execute();
+			queue.remove(0);
 			location.announce(action);
 		}
 	}
