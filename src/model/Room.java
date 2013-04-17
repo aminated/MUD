@@ -27,6 +27,12 @@ public class Room {
 	public void remove(Targetable thing){
 		contents.remove(thing);
 	}
+	public void connect(Room other, Direction d){
+		Door exit = new Door(this, other, d);
+		Door entrance = new Door(other, this, d.turnBack());
+		this.add(exit);
+		other.add(entrance);
+	}
 	public Targetable getByName(String name){
 		for(Targetable thing: contents){
 			if(thing.getName().equals(name))
@@ -43,8 +49,17 @@ public class Room {
 			// TODO : Make this more typesafe. 
 			if(thing instanceof Living){
 				Living creature = (Living) thing;
+				creature.sendMessage(event);
+			}
+		}
+	}
+	public void announce(String message){
+		for(Targetable thing: contents){
+			// TODO : Make this more typesafe. 
+			if(thing instanceof Living){
+				Living creature = (Living) thing;
 				creature.sendMessage(message);
 			}
 		}
-	
+	}
 }
