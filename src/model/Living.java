@@ -28,6 +28,9 @@ public abstract class Living implements Targetable {
 	public void setDisposition(Disposition d){
 		disposition = d;
 	}
+	public Disposition getDisposition(){
+		return disposition;
+	}
 	/**
 	 * Tells this Living entity that an event occurred in its room.
 	 * @param event An Action executed by someone in the room.

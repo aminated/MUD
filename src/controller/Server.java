@@ -34,6 +34,7 @@ public class Server extends Thread {
 			Player player = new Player(playerName,50);
 			PlayerDisposition disposition = new PlayerDisposition(client, player);
 			player.setDisposition(disposition);
+			player.setRoom(spawnpoint);
 			
 		}
 	}
