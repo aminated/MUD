@@ -27,6 +27,12 @@ public class Room {
 	public void remove(Targetable thing){
 		contents.remove(thing);
 	}
+	public void connect(Room other, Direction d){
+		Door exit = new Door(this, other, d);
+		Door entrance = new Door(other, this, d.turnBack());
+		this.add(exit);
+		other.add(entrance);
+	}
 	public Targetable getByName(String name){
 		for(Targetable thing: contents){
 			if(thing.getName().equals(name))

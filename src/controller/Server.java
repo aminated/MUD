@@ -10,9 +10,10 @@ import model.Room;
 
 public class Server extends Thread {
 	private ServerSocket sock; 
-	private Room spawnpoint;
+	public Room spawnpoint;
 	private static int PORT_NUM = 10042;
 	private int playerCount = 0; 
+	private GameTimer timer = new GameTimer();
 	@Override
 	public void run() {
 		try {
@@ -21,6 +22,7 @@ public class Server extends Thread {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+		timer.start();
 		while(true){
 			Socket client = null;
 			try {
@@ -35,6 +37,8 @@ public class Server extends Thread {
 			PlayerDisposition disposition = new PlayerDisposition(client, player);
 			player.setDisposition(disposition);
 			player.setRoom(spawnpoint);
+			timer.add(player);
+			
 			
 		}
 	}
