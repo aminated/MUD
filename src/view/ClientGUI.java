@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -31,10 +32,13 @@ public class ClientGUI extends JFrame{
 	private String newLine = "\n";
 	private Font plainFont;
 	private String gameName = "GAME NAME GOES HERE";
+	String serverName = "";
+	String portNumber = "";
 	
 	public ClientGUI(){
 		layoutGUI();
 		registerListeners();
+		askForServer();
 	}
 
 	/**
@@ -156,5 +160,35 @@ public class ClientGUI extends JFrame{
 	 */
 	public void appendOutputArea(String string) {
 		gameOutput.append(string);
-	}	
+	}
+	
+	/**
+	 * Opens a dialog box asking the user for a server name and port number
+	 */
+	public void askForServer() {		
+	    // Prompt user to enter the server name
+	    serverName = JOptionPane.showInputDialog(this, "Server Name:");
+	    
+	    // Prompt user to enter the port number
+	    portNumber = JOptionPane.showInputDialog(this, "Port Number:\n(THIS WILL EVENTUALLY BE COMBINED IN TO THE SERVER NAME DIALOG)");
+	    
+
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+//	    if (JOptionPane.YES_OPTION == JOptionPane.showconfirmDialog(
+//	    	    parentComponent, inputPanel, "Enter your data", JOptionPane.YES_NO_OPTION) {
+//
+//	    	    // retrieve data from the JTextFields and do things
+//
+//	    	} else {
+//
+//	    	    // User close the dialog, do things... or not
+//
+//	    }
+	}
 }
