@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -165,30 +166,21 @@ public class ClientGUI extends JFrame{
 	/**
 	 * Opens a dialog box asking the user for a server name and port number
 	 */
-	public void askForServer() {		
-	    // Prompt user to enter the server name
-	    serverName = JOptionPane.showInputDialog(this, "Server Name:");
-	    
-	    // Prompt user to enter the port number
-	    portNumber = JOptionPane.showInputDialog(this, "Port Number:\n(THIS WILL EVENTUALLY BE COMBINED IN TO THE SERVER NAME DIALOG)");
-	    
-
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-//	    if (JOptionPane.YES_OPTION == JOptionPane.showconfirmDialog(
-//	    	    parentComponent, inputPanel, "Enter your data", JOptionPane.YES_NO_OPTION) {
-//
-//	    	    // retrieve data from the JTextFields and do things
-//
-//	    	} else {
-//
-//	    	    // User close the dialog, do things... or not
-//
-//	    }
+	public void askForServer() {
+		JTextField nameField = new JTextField(10);
+		JTextField portField = new JTextField(5);
+		JPanel serverPanel = new JPanel();
+		  
+		serverPanel.add(new JLabel("Server Name:"));
+		serverPanel.add(nameField);
+		serverPanel.add(Box.createHorizontalStrut(15)); // a spacer
+		serverPanel.add(new JLabel("Port Number:"));
+		serverPanel.add(portField);
+		
+		int result = JOptionPane.showConfirmDialog(null, serverPanel, "Server information", JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION) {
+			serverName = nameField.getText();
+			portNumber = portField.getText();
+		}
 	}
 }
