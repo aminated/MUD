@@ -17,7 +17,7 @@ public class RunServer {
 		Room b = new Room("A dimly lit hallway");
 		Room c = new Room("A storage warehouse");
 		a.connect(b, Direction.North); 
-		b.connect(c, Direction.South);
+		b.connect(c, Direction.North);
 		
 		server.spawnpoint = a;
 		
