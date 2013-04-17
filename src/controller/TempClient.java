@@ -28,6 +28,7 @@ class Listener extends Thread{
 				e.printStackTrace();
 			}
 			System.out.println(input);
+			System.out.print(">");
 		}
 	}
 }
@@ -41,7 +42,6 @@ public class TempClient {
 		// TODO Auto-generated constructor stub
 	}
 	public static void main(String[] args){
-		RunServer.main(null);
 		
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		try {
@@ -54,8 +54,8 @@ public class TempClient {
 		Listener listener = new Listener();
 		listener.sock = sock;
 		listener.start();
+		System.out.print(">");
 		while(true){
-			System.out.print(">");
 			String input = null;
 			try {
 				input = in.readLine();

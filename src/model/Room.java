@@ -17,7 +17,7 @@ public class Room {
 		String output = description;
 		output += "\nThe room has: \n";
 		for(Targetable thing: contents){
-			output += thing.getName() + ":" + thing.getDescription() + "\n";
+			output += thing.getName() + ": " + thing.getDescription() + "\n";
 		}
 		return output;
 	}

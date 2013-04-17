@@ -30,6 +30,7 @@ public class Door implements Targetable {
 	public String activate(Living creature){
 		creature.setRoom(dest);
 		creature.sendMessage("You go through the door leading " + sourceDir.toString());
+		dest.announce(creature.getName() + " entered the room from the " + destDir.toString());
 		return creature.getName() + " left the room going " + sourceDir.toString();
 	}
 	public String useItem(Living creature, Item tool){

@@ -93,6 +93,8 @@ public class Action {
 			completed = true;
 			result = target.activate(source);
 		}
+		System.out.println("In room #" + source.getRoom().hashCode() + ": " + this.describe());
+
 	}
 	
 }
