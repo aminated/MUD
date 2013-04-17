@@ -1,36 +1,71 @@
 package controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
-public class TempClient {
-
-	public TempClient() {
-		// TODO Auto-generated constructor stub
-	}
-	public static void main(String[] args){
-		Socket sock = null;
-		ObjectInputStream netIn = null;
-		ObjectOutputStream netOut = null;
-		Scanner in = new Scanner(System.in);
+class Listener extends Thread{
+	public ObjectInputStream netIn;
+	public Socket sock;
+	public void run(){
 		try {
-			sock = new Socket("localhost", 10042);
 			netIn = new ObjectInputStream(sock.getInputStream());
-			netOut = new ObjectOutputStream(sock.getOutputStream());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		while(true){
-			String input = in.nextLine();
+			String input = null;
+			try {
+				input = (String) netIn.readObject();
+			} catch (ClassNotFoundException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(input);
+		}
+	}
+}
+
+public class TempClient {
+	static ObjectInputStream netIn = null;
+	static ObjectOutputStream netOut = null;
+	static Socket sock = null;
+
+	public TempClient() {
+		// TODO Auto-generated constructor stub
+	}
+	public static void main(String[] args){
+		RunServer.main(null);
+		
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			sock = new Socket("localhost", 10042);
+			netOut = new ObjectOutputStream(sock.getOutputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Listener listener = new Listener();
+		listener.sock = sock;
+		listener.start();
+		while(true){
+			System.out.print(">");
+			String input = null;
+			try {
+				input = in.readLine();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			try {
 			netOut.writeObject(input);
-			System.out.println( (String) netIn.readObject() );
-			} catch (ClassNotFoundException | IOException e) {
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

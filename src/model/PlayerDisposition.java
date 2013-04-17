@@ -22,7 +22,11 @@ public class PlayerDisposition extends Disposition{
 					// TODO Handle dropped connection.
 					e.printStackTrace();
 				}
-				queue.add(new Action(owner, command));
+				command = command.replaceAll("\\s", "");
+				if(command.equals("look"))
+					puts(owner.getRoom().describe());
+				else
+					queue.add(new Action(owner, command));
 			}
 		}
 		public void puts(String message){

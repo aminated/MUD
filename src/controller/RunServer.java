@@ -19,7 +19,7 @@ public class RunServer {
 		a.connect(b, Direction.North); 
 		b.connect(c, Direction.South);
 		
-		server.spawnpoint = new Room("A teleporter exit pad.");
+		server.spawnpoint = a;
 		
 		server.start();
 	}

@@ -62,9 +62,9 @@ public class Action {
 		if(args.length == 3){
 			String toolName = args[2];
 		}
-		else{
-			
-		}
+		targetName = targetName.replaceAll("\\s", "");
+		this.target = source.getRoom().getByName(targetName);
+		
 	}
 	public Action(Living source, Targetable target){
 		this.source = source;
@@ -89,7 +89,7 @@ public class Action {
 			result =  target.useItem(source, tool);
 		}
 		else{
-			completed = false;
+			completed = true;
 			result = target.activate(source);
 		}
 	}
