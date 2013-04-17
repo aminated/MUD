@@ -24,9 +24,14 @@ public class PlayerDisposition extends Disposition {
 			}
 		}
 	}
-	public PlayerDisposition(Socket client){
+	public PlayerDisposition(Socket client, Player player){
+		super(player);
 		this.listener = new ClientListener();
-		listener.stream = new ObjectInputStream( client.getInputStream() );
-		
+		try {
+			listener.stream = new ObjectInputStream( client.getInputStream() );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
