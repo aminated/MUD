@@ -43,8 +43,17 @@ public class Room {
 			// TODO : Make this more typesafe. 
 			if(thing instanceof Living){
 				Living creature = (Living) thing;
+				creature.sendMessage(event);
+			}
+		}
+	}
+	public void announce(String message){
+		for(Targetable thing: contents){
+			// TODO : Make this more typesafe. 
+			if(thing instanceof Living){
+				Living creature = (Living) thing;
 				creature.sendMessage(message);
 			}
 		}
-	
+	}
 }

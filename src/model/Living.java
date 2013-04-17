@@ -1,4 +1,7 @@
 package model;
+import java.util.LinkedList;
+import java.util.List;
+
 import items.Item;
 import model.Targetable;
 
@@ -11,6 +14,7 @@ public abstract class Living implements Targetable {
 	private Room room;
 	private String name;
 	private Disposition disposition = null;
+	private List<Item> items = new LinkedList<Item>();
 	public Living(String name, int base_hp){
 		this.name = name;
 		this.hp = this.base_hp = base_hp;
@@ -41,8 +45,10 @@ public abstract class Living implements Targetable {
 		disposition.notify(message);
 	}
 	public void addItem(Item item) {
-		// TODO Auto-generated method stub
-		
+		items.add(item);		
+	}
+	public void removeItem(Item item){
+		items.remove(item);
 	}
 	public String getName(){
 		return name;
