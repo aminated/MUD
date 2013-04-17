@@ -6,10 +6,15 @@ import model.Targetable;
  * The Living class pertains to any animate entity in the game. 
  */
 public abstract class Living implements Targetable {
-	private int base_hp;
-	private int hp;
+	protected int base_hp;
+	protected int hp;
 	private Room room;
+	private String name;
 	private Disposition disposition = null;
+	public Living(String name, int base_hp){
+		this.name = name;
+		this.hp = this.base_hp = base_hp;
+	}
 	public Room getRoom() {
 		return room;
 	}
@@ -39,5 +44,7 @@ public abstract class Living implements Targetable {
 		// TODO Auto-generated method stub
 		
 	}
-	
+	public String getName(){
+		return name;
+	}
 }

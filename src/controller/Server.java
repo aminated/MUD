@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
+
 import model.Room;
 
 public class Server implements Runnable {
@@ -11,13 +13,21 @@ public class Server implements Runnable {
 	@Override
 	public void run() {
 		try {
-			sock = new ServerSocket(10042);
+			sock = new ServerSocket(PORT_NUM);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		while(true){
-			sock.accept();
+			Socket client;
+			try {
+				client = sock.accept();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 		}
 	}
 
