@@ -1,16 +1,17 @@
 package items;
 
-
 /**
  * The baseball Bat is an average melee Weapon.
  */
-public class Bat extends Weapon{
+public class Bat extends Weapon {
 
-	
-	public Bat(String name, String description, int weight) {
-		super(name,description,weight);
+	public Bat() {
 		// TODO Auto-generated constructor stub
-
+		name = "Bat";
+		description = "The baseball Bat is an average melee Weapon.";
+		weight = 10;
+		atk = 5;
+		usetime = 30;
 	}
 
 }

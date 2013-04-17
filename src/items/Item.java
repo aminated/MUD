@@ -11,12 +11,6 @@ public abstract class Item implements Targetable {
 	protected String description;
 	protected int weight;
 
-	public Item(String name, String description, int weight) {
-		this.name = name;
-		this.description = description;
-		this.weight = weight;
-	}
-
 	public String getName() {
 		return name;
 	}

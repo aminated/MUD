@@ -2,17 +2,16 @@ package items;
 
 import model.Living;
 
-
 /**
  * Binoculars allow someone to view any room nearby.
  */
-public class Binoculars extends Item{
+public class Binoculars extends Item {
 
-	
-
-	public Binoculars(String name, String description, int weight) {
-		super(name, description, weight);
+	public Binoculars() {
 		// TODO Auto-generated constructor stub
+		name = "Binoculars";
+		description = " Binoculars allow someone to view any room nearby.";
+		weight = 5;
 	}
 
 	@Override
