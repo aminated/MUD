@@ -23,7 +23,9 @@ public abstract class Living implements Targetable {
 		return room;
 	}
 	public void setRoom(Room room) {
+		if(this.room != null) this.room.remove(this);
 		this.room = room;
+		this.room.add(this);
 	}
 	public void setDisposition(Disposition d){
 		disposition = d;

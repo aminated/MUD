@@ -1,11 +1,15 @@
 package model;
 
+import items.Item;
+
 public class Door implements Targetable {
 	private Room source;
 	private Room dest; 
 	private Direction sourceDir; // Door's position in the source room.
 	private Direction destDir; // Door's position in the destination room. 
 	public Door(Room source, Room dest, Direction d){
+		this.source = source;
+		this.dest = dest;
 		sourceDir = d;
 		destDir = d.turnBack();
 	}
@@ -25,7 +29,10 @@ public class Door implements Targetable {
 	}
 	public String activate(Living creature){
 		creature.setRoom(dest);
-		creature.sendMessage("You go through the door leading" + sourceDir.toString());
+		creature.sendMessage("You go through the door leading " + sourceDir.toString());
 		return creature.getName() + " left the room going " + sourceDir.toString();
+	}
+	public String useItem(Living creature, Item tool){
+		return "";
 	}
 }
