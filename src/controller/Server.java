@@ -14,6 +14,9 @@ public class Server extends Thread {
 	private static int PORT_NUM = 10042;
 	private int playerCount = 0; 
 	private GameTimer timer = new GameTimer();
+	public GameTimer getTimer(){
+		return timer;
+	}
 	@Override
 	public void run() {
 		try {
@@ -33,7 +36,7 @@ public class Server extends Thread {
 				e.printStackTrace();
 			}
 			String playerName = "Player-" + ++playerCount;
-			Player player = new Player(playerName,50);
+			Player player = new Player(playerName,50, 2);
 			PlayerDisposition disposition = new PlayerDisposition(client, player);
 			player.setDisposition(disposition);
 			player.setRoom(spawnpoint);
