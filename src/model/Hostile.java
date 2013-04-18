@@ -3,6 +3,6 @@ package model;
 /**
  * Hostile Mobs will always attack
  */
-public class Hostile implements Disposition {
+public class Hostile extends Disposition {
 
 }
