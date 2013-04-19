@@ -27,8 +27,11 @@ public abstract class Disposition {
 			Action action = queue.get(0);
 			Room location = owner.getRoom();
 			action.execute();
+			Room new_location = owner.getRoom();
 			queue.remove(0);
 			location.announce(action);
+			
+			if(!new_location.equals(location)) new_location.announce(action);
 		}
 	}
 	/**

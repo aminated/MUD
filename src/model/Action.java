@@ -56,15 +56,16 @@ public class Action {
 	 */
 	public Action(Living source, String command){
 		this.source = source;
-		Pattern p = Pattern.compile("\\w*(use|on)\\w*", Pattern.CASE_INSENSITIVE);
+		Pattern p = Pattern.compile("\\s*(use|on)\\s*", Pattern.CASE_INSENSITIVE);
 		String[] args = p.split(command);
 		String targetName = args[1];
+		System.out.println(targetName);
 		if(args.length == 3){
 			String toolName = args[2];
 		}
-		else{
-			
-		}
+		targetName = targetName.replaceAll("\\s", "");
+		this.target = source.getRoom().getByName(targetName);
+		
 	}
 	public Action(Living source, Targetable target){
 		this.source = source;
@@ -89,9 +90,11 @@ public class Action {
 			result =  target.useItem(source, tool);
 		}
 		else{
-			completed = false;
+			completed = true;
 			result = target.activate(source);
 		}
+		System.out.println("In room #" + source.getRoom().hashCode() + ": " + this.describe());
+
 	}
 	
 }

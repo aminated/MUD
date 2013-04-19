@@ -1,21 +1,23 @@
-package model;
+package MOB;
 
 import items.Item;
+import model.Hostile;
+import model.Living;
+import model.Mob;
 
-/**
- * The Player is a user controlled Living being.
- */
-public class Player extends Living{
+public class zombie extends Mob{
 
-
-
-	public Player(String name, int base_hp, int base_atk) {
+	public zombie(String name, int base_hp, int base_atk) {
 		super(name, base_hp, base_atk);
+		setDisposition(new Hostile());
 	}
-
+	public zombie(){
+		super("zombie",	30, 5);
+	}
+	
 	@Override
 	public String getDescription() {
-		return "Player \"" + getName() + "\" ("+hp+"/"+base_hp+")";
+		return "Mob \"" + getName() + "\" ("+hp+"/"+base_hp+")";
 	}
 
 	@Override

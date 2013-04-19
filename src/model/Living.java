@@ -11,19 +11,23 @@ import model.Targetable;
 public abstract class Living implements Targetable {
 	protected int base_hp;
 	protected int hp;
+	private int base_atk;
 	private Room room;
 	private String name;
 	private Disposition disposition = null;
 	private List<Item> items = new LinkedList<Item>();
-	public Living(String name, int base_hp){
+	public Living(String name, int base_hp, int base_atk){
 		this.name = name;
 		this.hp = this.base_hp = base_hp;
+		this.base_atk=base_atk;
 	}
 	public Room getRoom() {
 		return room;
 	}
 	public void setRoom(Room room) {
+		if(this.room != null) this.room.remove(this);
 		this.room = room;
+		this.room.add(this);
 	}
 	public void setDisposition(Disposition d){
 		disposition = d;
@@ -56,4 +60,8 @@ public abstract class Living implements Targetable {
 	public String getName(){
 		return name;
 	}
+	public int getAtkdmg(){
+		return base_atk;
+	}
+
 }
