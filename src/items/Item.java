@@ -27,5 +27,8 @@ public abstract class Item implements Targetable {
 		source.addItem(this);
 		return "Add " + name + " successfully!";
 	}
-
+	public String dropItem(Living source){
+		source.removeItem(this);
+		return "Drop "+ name + " successfully!";
+	}
 }

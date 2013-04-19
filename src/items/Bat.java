@@ -1,5 +1,7 @@
 package items;
 
+import model.Living;
+
 /**
  * The baseball Bat is an average melee Weapon.
  */
@@ -13,5 +15,6 @@ public class Bat extends Weapon {
 		atk = 5;
 		usetime = 30;
 	}
+	
 
 }

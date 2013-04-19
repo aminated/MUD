@@ -21,6 +21,7 @@ public class Player extends Living{
 	@Override
 	public String activate(Living source) {
 		source.sendMessage("You poke" + getName());
+
 		return source.getName() + " pokes " + getName();
 	}
 

@@ -1,5 +1,7 @@
 package items;
 
+import model.Living;
+
 /**
  * The Hammer is the worst melee Weapon in the game but it can also be used with
  * wood to block windows and door exits of buildings.
@@ -13,6 +15,11 @@ public class Hammer extends Weapon {
 		weight = 20;
 		atk = 10;
 		usetime = 30;
+	}
+	public String useItem(Living source, Item tool) {
+		// TODO Auto-generated method stub
+		
+		return null;
 	}
 
 }

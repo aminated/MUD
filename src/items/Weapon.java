@@ -22,7 +22,7 @@ public abstract class Weapon extends Item {
 			return "Attack " + source.getName() + " by using " + tool.getName()
 					+ " successfully!";
 		} else
-			return "You cannot use this item!";
+			return "You cannot use this item to attack anymore!";
 	}
 
 	public int getAtkdmg() {
@@ -32,4 +32,5 @@ public abstract class Weapon extends Item {
 	public int getUsetime() {
 		return usetime;
 	}
+
 }
