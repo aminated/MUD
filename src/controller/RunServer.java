@@ -1,6 +1,7 @@
 package controller;
 
 import model.CompanionDisposition;
+import model.Mob;
 import model.Player;
 import model.Room;
 import model.Direction;
@@ -24,7 +25,7 @@ public class RunServer {
 		c.connect(d, Direction.East);
 		d.connect(a, Direction.East);
 		a.remove(a.getByName("West-door"));
-		Player robot = new Player("Dog", 50, 1);
+		Mob robot = new Mob("Dog", 50, 1);
 		robot.setDisposition(new CompanionDisposition(robot));
 		robot.setRoom(a);
 		server.getTimer().add(robot); //TODO: figure out a way to do this automatically

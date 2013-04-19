@@ -13,6 +13,9 @@ public class Room {
 	public Room(String description){
 		this.description = description;
 	}
+	public List<Targetable> getContents(){
+		return contents;
+	}
 	public String describe(){
 		String output = description;
 		output += "\nThe room has: \n";
