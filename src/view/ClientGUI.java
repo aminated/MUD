@@ -44,7 +44,6 @@ public class ClientGUI extends JFrame{
 	private String serverName = "";
 	private String portNumber = "";
 	
-	private ObjectInputStream netIn = null;
 	private ObjectOutputStream netOut = null;
 	private Socket sock = null;
 	
@@ -209,14 +208,14 @@ public class ClientGUI extends JFrame{
 				e.printStackTrace();
 			}
 			while(true){
-				String input = null;
+				String output = null;
 				try {
-					input = (String) netIn.readObject();
+					output = (String) netIn.readObject();
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				appendGameOutput(input);
+				appendGameOutput(output);
 				appendGameOutput(">");
 			}
 		}
