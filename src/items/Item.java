@@ -28,11 +28,24 @@ public abstract class Item implements Targetable {
 	}
 
 	public String activate(Living source) {
-		source.addItem(this);
-		return "Add " + name + " successfully!";
+		if(!source.hasItem(this)){
+			source.addItem(this);
+			return "Add " + name + " successfully!";
+		}
+		else{
+			return use(source);
+		}
 	}
 	public String dropItem(Living source){
 		source.removeItem(this);
 		return "Drop "+ name + " successfully!";
 	}
+	/**
+	 * When someone types "use" with an item in their inventory. 
+	 * Ex: use Health-potion
+	 * @param source The owner of the item
+	 * @return A public string about what happened.
+	 */
+	public abstract String use(Living source);
+	
 }

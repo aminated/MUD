@@ -7,6 +7,7 @@ import java.util.List;
  *
  */
 public abstract class Function<I,O> {
+
 	public abstract O call(I x);
 	public List<O> map(List<I> x){
 		LinkedList<O> output = new LinkedList<O>();
@@ -16,10 +17,12 @@ public abstract class Function<I,O> {
 		return output;
 	}
 	public Function<I,O> after(final Function<I,I> f){
-		return new Function<I,O>(){
+		return (new Function<I,O>(){
 			public O call(I x){
 				return call(f.call(x));
 			}
-		};
+		});
 	}
 }
+
+

@@ -28,7 +28,17 @@ public class PlayerDisposition extends Disposition{
 					// TODO Handle dropped connection.
 					e.printStackTrace();
 				}
-				command = command.replaceAll("\\s", "");
+				CommandParser parser = null;
+				for(CommandParser candidate : commands){
+					if(candidate.matches(command))
+						parser = candidate;
+				}
+				if(parser == null){
+					puts("Command not found. \n");
+				}
+				else{
+					parser.invoke();
+				}
 				if(command.equals("look"))
 					puts(owner.getRoom().describe());
 				else
@@ -47,6 +57,7 @@ public class PlayerDisposition extends Disposition{
 	private List<CommandParser> commands = new LinkedList<CommandParser>();
 	private abstract class CommandParser implements Cloneable {
 		public String regex;
+		public String command;
 		public String[] args;
 		/**
 		 * Split a command into a unix-style arg array. 
@@ -54,7 +65,7 @@ public class PlayerDisposition extends Disposition{
 		 * @return
 		 */
 		private String[] split(String command){ 
-			Pattern p = Pattern.compile("\\s+((on|go)\\s+)?", Pattern.CASE_INSENSITIVE);
+			Pattern p = Pattern.compile("\\s+((on|go|at|to)\\s+)?", Pattern.CASE_INSENSITIVE);
 			String[] args = p.split(command);
 			if(args[0].equals("")) args = Arrays.copyOfRange(args, 1, args.length);
 			return args;
@@ -80,6 +91,7 @@ public class PlayerDisposition extends Disposition{
 			String[] args = split(command);
 			if(p.matcher(args[0]).matches()){
 				this.args = args;
+				this.command = command;
 				return true;
 			}
 			else return false;
@@ -111,6 +123,25 @@ public class PlayerDisposition extends Disposition{
 			}
 		};
 		commands.add(cmdMove);
+		CommandParser cmdLook = new CommandParser(){
+			public String regex = "look";
+			public void invoke(){
+				if(args.length == 1)
+					listener.puts(owner.getRoom().describe());
+				// TODO: Implement Look command taking arguments. 
+			}
+		};
+		commands.add(cmdLook);
+		CommandParser cmdUse = new CommandParser(){
+			public String regex = "use";
+			public void invoke(){
+				// Pass off to Action
+				// TODO: Handle different types of "use" so we don't parse things twice. 
+				// Leave that for refactoring.
+				queue.add(new Action(owner, command));
+			}
+		};
+		
 	}
 	public PlayerDisposition(Socket client, Player player){
 		super(player);
