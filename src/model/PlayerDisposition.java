@@ -1,9 +1,15 @@
 package model;
 
+import items.Item;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.regex.Pattern;
 
 public class PlayerDisposition extends Disposition{
 	private ClientConnection listener;
@@ -38,8 +44,78 @@ public class PlayerDisposition extends Disposition{
 			}
 		}
 	}
+	private List<CommandParser> commands = new LinkedList<CommandParser>();
+	private abstract class CommandParser implements Cloneable {
+		public String regex;
+		public String[] args;
+		/**
+		 * Split a command into a unix-style arg array. 
+		 * @param command
+		 * @return
+		 */
+		private String[] split(String command){ 
+			Pattern p = Pattern.compile("\\s+((on|go)\\s+)?", Pattern.CASE_INSENSITIVE);
+			String[] args = p.split(command);
+			if(args[0].equals("")) args = Arrays.copyOfRange(args, 1, args.length);
+			return args;
+		}
+		public CommandParser clone(){
+			CommandParser copy = null;
+			try {
+				copy = (CommandParser) super.clone();
+			} catch (CloneNotSupportedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return copy;
+		}
+
+		public CommandParser rename(String newName){
+			CommandParser copy = this.clone();
+			copy.regex = newName;
+			return copy;
+		}
+		public boolean matches(String command){
+			Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+			String[] args = split(command);
+			if(p.matcher(args[0]).matches()){
+				this.args = args;
+				return true;
+			}
+			else return false;
+		}
+		public abstract void invoke();
+	}
+	private void addCommands(){
+		CommandParser cmdInventory = new CommandParser(){
+			public String regex = "inventory";
+			public void invoke(){
+				String output = "Inventory: \n";
+				for(Item i: owner.getItems()) 
+					output += i.getName() + ": " + i.getDescription() + "\n";
+				listener.puts(output);
+			}
+		};
+		commands.add(cmdInventory);
+		CommandParser cmdMove = new CommandParser(){
+			public String regex = "(north|south|east|west)";
+			private String capitalize(String string){
+				char[] charArray = string.toCharArray();
+				charArray[0] = Character.toUpperCase(charArray[0]);
+				return new String(charArray);
+			}
+			public void invoke(){
+				String dir = capitalize(args[0]);
+				String doorName = dir + "-door";
+				addAction(new Action(owner, "use " + doorName));
+			}
+		};
+		commands.add(cmdMove);
+	}
 	public PlayerDisposition(Socket client, Player player){
 		super(player);
+		
+		
 		this.listener = new ClientConnection();
 		try {
 			listener.istream = new ObjectInputStream( client.getInputStream() );

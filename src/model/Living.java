@@ -57,6 +57,9 @@ public abstract class Living implements Targetable {
 	public void removeItem(Item item){
 		items.remove(item);
 	}
+	public List<Item> getItems(){
+		return items;
+	}
 	public String getName(){
 		return name;
 	}
