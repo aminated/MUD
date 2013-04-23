@@ -22,8 +22,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import controller.RunServer;
-
 /**
  * @authors Team Dungeon Masters
  * CSC 335
@@ -41,17 +39,20 @@ public class ClientGUI extends JFrame{
 	private String newLine = "\n";
 	private Font plainFont;
 	private String gameName = "GAME NAME GOES HERE";
-	String serverName = "";
-	String portNumber = "";
+	private String input;
 	
-    static ObjectInputStream netIn = null;
-    static ObjectOutputStream netOut = null;
-    static Socket sock = null;
+	private String serverName = "";
+	private String portNumber = "";
+	
+	private ObjectInputStream netIn = null;
+	private ObjectOutputStream netOut = null;
+	private Socket sock = null;
 	
 	public ClientGUI(){
 		layoutGUI();
 		registerListeners();
 		askForServer();
+		start();
 	}
 
 	/**
@@ -105,10 +106,9 @@ public class ClientGUI extends JFrame{
 		gameOutput.setEditable(false);
 		gameOutput.setBackground(Color.BLACK);
 		gameOutput.setForeground(Color.GREEN);
-		gameOutput.setText("#######################");
-		gameOutput.append(newLine + "# " + gameName + " #" + newLine);
-		gameOutput.append("#######################");
-		
+		gameOutput.setText("#########################");
+		gameOutput.append(newLine + "## " + gameName + " ##" + newLine);
+		gameOutput.append("#########################" + newLine + newLine);
 
 		// Sets the look of chatInput
 		chatInput = new JTextField();
@@ -160,18 +160,18 @@ public class ClientGUI extends JFrame{
 	private class InputListener implements ActionListener {
 		
 		/**
-		 *  Called when text is entered in inputField
+		 *  Called when text is entered in gameInput field
 		 */
 		public void actionPerformed(ActionEvent anActionEvent) {
-
-			
+			input = gameInput.getText();
+			gameInput.setText("");
 		}
 	}
 	
 	/**
-	 * Appends outputArea with a String
+	 * Appends gameOutput area with a String
 	 */
-	public void appendOutputArea(String string) {
+	public void appendGameOutput(String string) {
 		gameOutput.append(string);
 	}
 	
@@ -181,6 +181,8 @@ public class ClientGUI extends JFrame{
 	public void askForServer() {
 		JTextField nameField = new JTextField(10);
 		JTextField portField = new JTextField(5);
+		nameField.setText("localhost");
+		portField.setText("10042");
 		JPanel serverPanel = new JPanel();
 		  
 		serverPanel.add(new JLabel("Server Name:"));
@@ -214,41 +216,35 @@ public class ClientGUI extends JFrame{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println(input);
+				appendGameOutput(input);
+				appendGameOutput(">");
 			}
 		}
 	}
 	
-	public static void main(String[] args){
-        ClientGUI gui = new ClientGUI();
-		
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        try {
-                sock = new Socket("localhost", 10042);
-                netOut = new ObjectOutputStream(sock.getOutputStream());
-        } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-        }
-        Listener listener = gui.new Listener();
-        listener.sock = sock;
-        listener.start();
-        System.out.print(">");
-        while(true){
-                String input = null;
-                try {
-                        input = in.readLine();
-                } catch (IOException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
-                }
-                try {
-                netOut.writeObject(input);
-                } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                }
-                
-        }
+	public void start(){
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			sock = new Socket(serverName, Integer.parseInt(portNumber));
+			netOut = new ObjectOutputStream(sock.getOutputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Listener listener = new Listener();
+		listener.sock = sock;
+		listener.start();
+		appendGameOutput(">");
+		while(true){
+			if(input != null){
+				try {
+					netOut.writeObject(input);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				input = null;
+			}
+		}
 	}
 }
