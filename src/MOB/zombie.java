@@ -1,17 +1,17 @@
-package MOB;
+package mob;
 
 import items.Item;
 import model.Hostile;
 import model.Living;
 import model.Mob;
 
-public class zombie extends Mob{
+public class Zombie extends Mob{
 
-	public zombie(String name, int base_hp, int base_atk) {
+	public Zombie(String name, int base_hp, int base_atk) {
 		super(name, base_hp, base_atk);
-		setDisposition(new Hostile());
+		setDisposition(new Hostile(this));
 	}
-	public zombie(){
+	public Zombie(){
 		super("zombie",	30, 5);
 	}
 	
