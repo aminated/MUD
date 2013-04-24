@@ -1,5 +1,6 @@
 package model;
 
+import disposition.Healer;
 import items.Item;
 
 /**
@@ -20,6 +21,11 @@ public class Player extends Living{
 
 	@Override
 	public String activate(Living source) {
+	
+		if (source.getDisposition() instanceof Healer){
+			heal(50);
+			return source.getName() + " heals " + getName() + "50 HP";
+		}
 		source.sendMessage("You poke " + getName());
 		return source.getName() + " pokes " + getName();
 	}

@@ -71,5 +71,9 @@ public abstract class Living implements Targetable {
 	public int getAtkdmg(){
 		return base_atk;
 	}
-
+	public void heal(int heal){
+		hp+=heal;
+		if (hp>base_hp)
+			hp=base_hp;
+	}
 }
