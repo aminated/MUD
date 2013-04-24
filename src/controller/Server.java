@@ -11,14 +11,11 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
-import view.ClientGUI;
-
 import model.Direction;
 import model.Player;
 import model.PlayerDisposition;
 import model.Room;
+import view.ClientGUI;
 
 public class Server extends Thread {
 	private ServerSocket sock; 
@@ -59,7 +56,7 @@ public class Server extends Thread {
 			player.setDisposition(disposition);
 			player.setRoom(roomDB.get(1));
 			roomDB.get(1).add(player);
-			timer.add(player);			
+			timer.add(player);
 		}
 	}
 	
@@ -67,7 +64,14 @@ public class Server extends Thread {
 	 * Creates a new Player, adds it to a Room, and adds it to the playerDB.
 	 */
 	public void createPlayer(String name, String password, Socket client){
-
+		
+	}
+	
+	/**
+	 * Asks user for a player name and password
+	 */
+	public void requestLogin(ClientGUI client){
+		
 	}
 	
 	/**
