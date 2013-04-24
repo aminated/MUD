@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -8,7 +9,7 @@ import java.util.Random;
  * A Room is exactly that, a room. It can hold Living and Items and can have
  * up to four exits.
  */
-public class Room {
+public class Room implements Serializable{
 	private List<Targetable> contents = new LinkedList<Targetable>();
 	private String description;
 	public Room(String description){
