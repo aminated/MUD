@@ -145,6 +145,8 @@ public class PlayerDisposition extends Disposition{
 				queue.add(new Action(owner, command));
 			}
 		};
+		commands.add(cmdUse);
+		
 		
 	}
 	public PlayerDisposition(Socket client, Player player){
