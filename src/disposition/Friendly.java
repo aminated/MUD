@@ -1,20 +1,27 @@
-package model;
+package disposition;
 
 import items.Item;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import model.Action;
+import model.Door;
+import model.Living;
+import model.Room;
+import model.Targetable;
+
+
 /**
- * Hostile Mobs will always attack
+ * Friendly Mobs will offer Items for trade and do not attack unless provoked
  */
-public class Hostile extends Disposition {
+public class Friendly extends Disposition {
 	protected List<Action> queue = new LinkedList<Action>();
 	protected Living owner;
 	protected void addAction(Action todo){
 		queue.add(todo);
 	}
-	public Hostile(Living owner){
+	public Friendly(Living owner){
 		super(owner);
 	}
 	public boolean hasNext(){
@@ -40,8 +47,10 @@ public class Hostile extends Disposition {
 		Targetable prey=owner.getRoom().seek();
 		if (prey==null || prey instanceof Item)
 			leave();	// If the room is empty (A room without door, weird) or prey is not living thing, Mob leaves this room.
-		else{
-			addAction( new Action(owner, prey));
+		else
+		if (prey instanceof Living){
+			if (((Living) prey).getDisposition() instanceof Hostile)
+				addAction( new Action(owner, prey));
 		}
 	}
 	public void leave(){
@@ -55,7 +64,7 @@ public class Hostile extends Disposition {
 	 * @param event An Action just executed by another creature in the room. 
 	 */
 	public void notify(Action event){
-		if(event.getSource() instanceof Player && event.getTarget() instanceof Door) // Otherwise Mobs will fight each other
+		if(event.getSource().getDisposition() instanceof Hostile && event.getTarget() instanceof Door) // Otherwise Mobs will fight each other
 			  if( event.getSource().getRoom().equals(owner.getRoom() ) )// Make sure it's not them leaving the room.
 				  addAction( new Action(owner, event.getSource()));  // Attack whoever entered the room
 	}
@@ -68,4 +77,3 @@ public class Hostile extends Disposition {
 		
 	}
 }
-

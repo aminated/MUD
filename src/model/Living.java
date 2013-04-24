@@ -2,6 +2,8 @@ package model;
 import java.util.LinkedList;
 import java.util.List;
 
+import disposition.Disposition;
+
 import items.Item;
 import model.Targetable;
 

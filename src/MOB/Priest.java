@@ -1,7 +1,7 @@
 package mob;
 
+import disposition.Friendly;
 import items.Item;
-import model.Friendly;
 import model.Living;
 import model.Mob;
 /**

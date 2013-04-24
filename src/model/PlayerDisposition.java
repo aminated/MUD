@@ -11,6 +11,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import disposition.Disposition;
+
 public class PlayerDisposition extends Disposition{
 	private ClientConnection listener;
 	private class ClientConnection extends Thread{

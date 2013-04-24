@@ -1,9 +1,9 @@
 package mob;
 
+import disposition.Neutral;
 import items.Item;
 import model.Living;
 import model.Mob;
-import model.Neutral;
 
 public class Vendor extends Mob{
 
