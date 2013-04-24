@@ -41,10 +41,12 @@ public class PlayerDisposition extends Disposition{
 				else{
 					parser.invoke();
 				}
+				/*
 				if(command.equals("look"))
 					puts(owner.getRoom().describe());
 				else
 					queue.add(new Action(owner, command));
+					*/
 			}
 		}
 		public void puts(String message){

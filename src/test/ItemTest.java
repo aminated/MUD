@@ -14,7 +14,6 @@ import items.Shotgun;
 import items.Sword;
 
 import model.Living;
-import model.Monster;
 import model.Player;
 
 import org.junit.Test;

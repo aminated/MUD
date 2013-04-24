@@ -12,11 +12,12 @@ public class LargePotion extends Item {
 		description = "A large potion can heal the player 50HP who is injured.";
 		weight = 5;
 	}
-
+	
 	@Override
 	public String useItem(Living source, Item tool) {
 		// TODO Auto-generated method stub
 		// Living's HP increases 50
+		
 		return "HP recovers 50!";
 	}
 

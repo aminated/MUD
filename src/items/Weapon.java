@@ -8,9 +8,11 @@ import model.Living;
 public abstract class Weapon extends Item {
 	protected int atk;
 	protected int usetime;
-
-	public Weapon() {
-
+	public Weapon(){
+		
+	}
+	public Weapon(String name, String description, int weight) {
+		super(name,description,weight);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -24,7 +26,9 @@ public abstract class Weapon extends Item {
 		} else
 			return "You cannot use this item to attack anymore!";
 	}
-
+	public String use(Living source){
+		return "Weapons need a target to use";
+	}
 	public int getAtkdmg() {
 		return atk;
 	}
