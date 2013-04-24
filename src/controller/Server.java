@@ -13,6 +13,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import view.ClientGUI;
+
 import model.Direction;
 import model.Player;
 import model.PlayerDisposition;
@@ -99,7 +101,7 @@ public class Server extends Thread {
 		    
 		    // Adding a Player to use as a test
 		    Player test = new Player("TEST", "password", 1, 1);
-//		    test.setRoom(roomDB.get(1));
+		    test.setRoom(roomDB.get(1));
 		    players.add(test);
 		    
 		    outFile.writeObject(players);
@@ -212,5 +214,12 @@ public class Server extends Thread {
 			System.out.println("Writing Room database: FAILED");
 		}
 		System.out.println("Writing Room dababase: SUCCESS");
+	}
+	
+	/**
+	 * Displays a help menu for the user
+	 */
+	public void displayHelp(ClientGUI client){
+		client.displayGameOutput("\n\nHELP GOES HERE\n\n");
 	}
 }
