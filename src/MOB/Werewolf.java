@@ -5,12 +5,12 @@ import model.Mob;
 
 public class Werewolf extends Mob{
 
-	public Werewolf(String name, int base_hp, int base_atk) {
-		super(name, base_hp, base_atk);
+	public Werewolf(String name, int base_hp, int base_atk, int money) {
+		super(name, base_hp, base_atk, money);
 		setDisposition(new Hostile(this));
 	}
 	public Werewolf(){
-		super("Werewolf", 100, 15);
+		super("Werewolf", 100, 15, 30);
 	}
 	
 
