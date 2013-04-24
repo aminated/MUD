@@ -2,14 +2,13 @@ package model;
 
 import items.Item;
 
-import java.io.Serializable;
 
 import disposition.Healer;
 
 /**
  * The Player is a user controlled Living being.
  */
-public class Player extends Living implements Serializable{
+public class Player extends Living{
 
 	private String password;
 

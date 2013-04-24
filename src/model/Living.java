@@ -1,4 +1,5 @@
 package model;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import model.Targetable;
 /**
  * The Living class pertains to any animate entity in the game. 
  */
-public abstract class Living implements Targetable {
+public abstract class Living implements Targetable, Serializable{
 	protected int base_hp;
 	protected int hp;
 	private int base_atk;
