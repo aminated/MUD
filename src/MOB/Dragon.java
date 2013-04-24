@@ -4,18 +4,19 @@ import items.Item;
 import model.Hostile;
 import model.Living;
 import model.Mob;
+
 /**
- * A Zombie is a weak Mob that will attack players in the same room. Easy to kill and few loot.
+ * A Dragon is a very strong Mob that will attack players in the same room. Rich loot.
  * 
  */
-public class Zombie extends Mob{
+public class Dragon extends Mob{
 
-	public Zombie(String name, int base_hp, int base_atk) {
+	public Dragon(String name, int base_hp, int base_atk) {
 		super(name, base_hp, base_atk);
 		setDisposition(new Hostile(this));
 	}
-	public Zombie(){
-		super("zombie",	15, 5);
+	public Dragon(){
+		super("Dragon",	500, 50);
 	}
 	
 	@Override

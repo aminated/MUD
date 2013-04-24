@@ -1,21 +1,21 @@
 package mob;
 
 import items.Item;
-import model.Hostile;
+import model.Friendly;
 import model.Living;
 import model.Mob;
 /**
- * A Zombie is a weak Mob that will attack players in the same room. Easy to kill and few loot.
+ * A Priest is a friendly Mob that will heal players in the same room. 
  * 
  */
-public class Zombie extends Mob{
+public class Priest extends Mob{
 
-	public Zombie(String name, int base_hp, int base_atk) {
+	public Priest(String name, int base_hp, int base_atk) {
 		super(name, base_hp, base_atk);
-		setDisposition(new Hostile(this));
+		setDisposition(new Friendly(this));
 	}
-	public Zombie(){
-		super("zombie",	15, 5);
+	public Priest(){
+		super("Priest",	50, 5);
 	}
 	
 	@Override

@@ -22,8 +22,8 @@ public class Mob extends Living{
 
 	@Override
 	public String activate(Living source) {
-		source.sendMessage("You poke " + getName());
-		return source.getName() + " pokes " + getName();
+		//source.sendMessage("You poke " + getName());
+		return attack(source);
 	}
 
 	@Override
