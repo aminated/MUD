@@ -10,6 +10,9 @@ public abstract class Item implements Targetable {
 	protected String name;
 	protected String description;
 	protected int weight;
+	public Item(){
+		
+	}
 	public Item(String name, String description, int weight){
 		this.name = name;
 		this.description = description;

@@ -8,7 +8,7 @@ import java.util.Random;
  * A Room is exactly that, a room. It can hold Living and Items and can have
  * up to four exits.
  */
-public class Room {
+public class Room implements Serializable {
 	private List<Targetable> contents = new LinkedList<Targetable>();
 	private String description;
 	public Room(String description){

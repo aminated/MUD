@@ -15,6 +15,12 @@ public class Bat extends Weapon {
 		atk = 5;
 		usetime = 30;
 	}
+
+	@Override
+	public String use(Living source) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }
