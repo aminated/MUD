@@ -2,7 +2,6 @@ package controller;
 
 import model.CompanionDisposition;
 import model.Mob;
-import model.Player;
 import model.Room;
 import model.Direction;
 /**
@@ -32,6 +31,7 @@ public class RunServer {
 		server.spawnpoint = a;
 		
 		server.start();
+		server.loadRoomDB();
+		server.loadPlayerDB();
 	}
-
 }
