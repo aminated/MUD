@@ -51,10 +51,10 @@ public class Server extends Thread {
 			}
 			
 			// New Client has connected
-			Player player = new Player("temp", "temp", 50, 2);
+			Player player = new Player("temp", 50, 2);
 			PlayerDisposition disposition = new PlayerDisposition(client, player);
 			player.setDisposition(disposition);
-			player.setRoom(roomDB.get(1));
+			player.setRoom(spawnpoint);
 			roomDB.get(1).add(player);
 			timer.add(player);
 		}

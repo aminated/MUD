@@ -14,7 +14,6 @@ import items.Shotgun;
 import items.Sword;
 
 import model.Living;
-import model.Monster;
 import model.Player;
 
 import org.junit.Test;
@@ -23,7 +22,7 @@ public class ItemTest {
 
 	@Test
 	public void testBat() {
-		Bat a = new Bat();
+		Bat a = new Bat("Bat", "The baseball Bat is an average melee Weapon.", 10, 30);
 		assertEquals("Bat",a.getName());
 		assertEquals(10, a.getWeight());
 		assertEquals("The baseball Bat is an average melee Weapon.", a.getDescription());
