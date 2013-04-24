@@ -12,6 +12,12 @@ public class Bat extends Weapon {
 		super(name, description, weight,usetime);
 		// TODO Auto-generated constructor stub
 	}
+
+	@Override
+	public String use(Living source) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	public Bat(){
 		name="Bat";

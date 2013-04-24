@@ -1,7 +1,7 @@
 package tests;
 
+import disposition.Disposition;
 import model.Action;
-import model.Disposition;
 import model.Living;
 /**
  * Dummy plug: this disposition exposes addAction to enable it to be controlled externally. 

@@ -1,8 +1,8 @@
 package controller;
 
+import mob.Dragon;
 import model.CompanionDisposition;
 import model.Mob;
-import model.Player;
 import model.Room;
 import model.Direction;
 /**
@@ -28,10 +28,14 @@ public class RunServer {
 		Mob robot = new Mob("Dog", 50, 1);
 		robot.setDisposition(new CompanionDisposition(robot));
 		robot.setRoom(a);
+		Mob dragon = new Dragon();
+		dragon.setRoom(b);
+		server.getTimer().add(dragon);
 		server.getTimer().add(robot); //TODO: figure out a way to do this automatically
 		server.spawnpoint = a;
 		
 		server.start();
+		server.loadRoomDB();
+		server.loadPlayerDB();
 	}
-
 }

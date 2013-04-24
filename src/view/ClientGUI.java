@@ -44,7 +44,6 @@ public class ClientGUI extends JFrame{
 	private String serverName = "";
 	private String portNumber = "";
 	
-	private ObjectInputStream netIn = null;
 	private ObjectOutputStream netOut = null;
 	private Socket sock = null;
 	
@@ -171,8 +170,15 @@ public class ClientGUI extends JFrame{
 	/**
 	 * Appends gameOutput area with a String
 	 */
-	public void appendGameOutput(String string) {
+	public void displayGameOutput(String string) {
 		gameOutput.append(string);
+	}
+	
+	/**
+	 * Appends chatOutput area with a String
+	 */
+	public void displayChatOutput(String string) {
+		chatOutput.append(string);
 	}
 	
 	/**
@@ -209,15 +215,15 @@ public class ClientGUI extends JFrame{
 				e.printStackTrace();
 			}
 			while(true){
-				String input = null;
+				String output = null;
 				try {
-					input = (String) netIn.readObject();
+					output = (String) netIn.readObject();
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				appendGameOutput(input);
-				appendGameOutput(">");
+				displayGameOutput(output);
+				displayGameOutput(">");
 			}
 		}
 	}
@@ -234,7 +240,7 @@ public class ClientGUI extends JFrame{
 		Listener listener = new Listener();
 		listener.sock = sock;
 		listener.start();
-		appendGameOutput(">");
+		displayGameOutput(">");
 		while(true){
 			if(input != null){
 				try {

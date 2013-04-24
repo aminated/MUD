@@ -1,5 +1,7 @@
 package model;
 
+import disposition.Disposition;
+
 /**
  * A very simple example disposition. Follows the player around wherever he/she goes. 
  * @author Andrey

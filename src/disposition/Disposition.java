@@ -1,7 +1,11 @@
-package model;
+package disposition;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import model.Action;
+import model.Living;
+import model.Room;
 
 /**
  * A strategy for Mobs and players.

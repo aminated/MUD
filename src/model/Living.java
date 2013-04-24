@@ -2,6 +2,8 @@ package model;
 import java.util.LinkedList;
 import java.util.List;
 
+import disposition.Disposition;
+
 import items.Item;
 import model.Targetable;
 
@@ -57,6 +59,9 @@ public abstract class Living implements Targetable {
 	public void removeItem(Item item){
 		items.remove(item);
 	}
+	public boolean hasItem(Item item){
+		return items.contains(item);
+	}
 	public List<Item> getItems(){
 		return items;
 	}
@@ -66,5 +71,9 @@ public abstract class Living implements Targetable {
 	public int getAtkdmg(){
 		return base_atk;
 	}
-
+	public void heal(int heal){
+		hp+=heal;
+		if (hp>base_hp)
+			hp=base_hp;
+	}
 }
