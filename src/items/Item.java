@@ -1,12 +1,14 @@
 package items;
 
+import java.io.Serializable;
+
 import model.Living;
 import model.Targetable;
 
 /**
  * An Item is any non-Living object in the game that may be picked up.
  */
-public abstract class Item implements Targetable {
+public abstract class Item implements Targetable, Serializable{
 	protected String name;
 	protected String description;
 	protected int weight;

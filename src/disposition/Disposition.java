@@ -1,5 +1,6 @@
 package disposition;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import model.Room;
  * The disposition will be notified of Actions that take place in the room by notify() method. 
  * We may want subclasses of this to be separate threads so they can run concurrently with the timer. 
  */
-public abstract class Disposition {
+public abstract class Disposition implements Serializable{
 	protected List<Action> queue = new LinkedList<Action>();
 	protected Living owner;
 	protected void addAction(Action todo){
