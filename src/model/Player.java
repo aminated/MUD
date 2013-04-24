@@ -13,8 +13,8 @@ public class Player extends Living implements Serializable{
 
 	private String password;
 
-	public Player(String name, String password, int base_hp, int base_atk) {
-		super(name, base_hp, base_atk);
+	public Player(String name, String password, int base_hp, int base_atk, int money) {
+		super(name, base_hp, base_atk, money);
 		this.password = password;
 	}
 

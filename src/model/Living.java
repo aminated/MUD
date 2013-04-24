@@ -13,15 +13,17 @@ import model.Targetable;
 public abstract class Living implements Targetable {
 	protected int base_hp;
 	protected int hp;
+	private int money;
 	private int base_atk;
 	private Room room;
 	private String name;
 	private Disposition disposition = null;
 	private List<Item> items = new LinkedList<Item>();
-	public Living(String name, int base_hp, int base_atk){
+	public Living(String name, int base_hp, int base_atk, int money){
 		this.name = name;
 		this.hp = this.base_hp = base_hp;
-		this.base_atk=base_atk;
+		this.base_atk = base_atk;
+		this.money = money;
 	}
 	public Room getRoom() {
 		return room;
@@ -75,5 +77,22 @@ public abstract class Living implements Targetable {
 		hp+=heal;
 		if (hp>base_hp)
 			hp=base_hp;
+	}
+	public int getMoney(){
+		return money;
+	}
+	public void addMoney(int value){
+		money+=value;
+	}
+	/*
+	 * Source kills this Object and loot all things
+	 */
+	public String die(Living source){
+		getRoom().remove(this);
+		source.addMoney(this.getMoney());
+		for(Item thing: items){
+			source.addItem(thing);
+		}
+		return source.getName() + " kills " + getName();
 	}
 }
