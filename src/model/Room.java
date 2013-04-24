@@ -2,6 +2,7 @@ package model;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * A Room is exactly that, a room. It can hold Living and Items and can have
@@ -63,6 +64,18 @@ public class Room {
 				Living creature = (Living) thing;
 				creature.sendMessage(message);
 			}
+		}
+	}
+	/**
+	 * Find a random thing in the room
+ 	 */
+	public Targetable seek(){
+		if (contents.size()==0)
+			return null;
+		else{
+			Random rn = new Random();
+			int i = rn.nextInt() % contents.size();
+			return contents.get(i);
 		}
 	}
 }
