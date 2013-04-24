@@ -16,8 +16,13 @@ public class Sword extends Weapon {
 		atk = 15;
 		usetime = 30;
 	}
-	
-	
+
+	public String use(Living source) {
+		// TODO Auto-generated method stub
+			return null;
+		}
+
+
 	// public killwithonehit()
 
 }
