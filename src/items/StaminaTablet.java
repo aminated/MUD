@@ -2,14 +2,11 @@ package items;
 
 import model.Living;
 
-/**
- * A small potion can heal the player 25HP who is injured.
- */
-public class SmallPotion extends Item {
+public class StaminaTablet extends Item {
 
-	public SmallPotion() {
-		name = "Small Potion";
-		description = "A small potion can heal the player 25HP who is injured.";
+	public StaminaTablet() {
+		name = "Stamina Tablet";
+		description = "A Stamina tablet can increase player's 15 maxHP.";
 		weight = 2;
 		usetime =1;
 	}
@@ -21,5 +18,4 @@ public class SmallPotion extends Item {
 		return "HP recovers 25!";
 	}
 
-	
 }

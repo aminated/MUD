@@ -19,21 +19,28 @@ public class Monster extends Living {
 	public String activate(Living source) {
 		source.sendMessage("You attack the monster");
 		hp--;
-		if(hp == 0){ this.getRoom().remove(this);
-		return getName() + " dies.";
+		if (hp == 0) {
+			this.getRoom().remove(this);
+			return getName() + " dies.";
 		}
 		return source.getName() + " attacks " + getName();
 	}
 
 	@Override
 	public String useItem(Living source, Item tool) {
-		source.sendMessage("You attack the monster with " + tool.getName());
-		hp--;
-		if(hp == 0){ this.getRoom().remove(this);
-		return getName() + " dies.";
+		if (tool.getUsetime() <= 0) {
+			return "You cannot use this item to attack anymore!";
+		} else {
+			source.sendMessage("You attack the monster with " + tool.getName());
+			hp--;
+			if (hp == 0) {
+				this.getRoom().remove(this);
+				return getName() + " dies.";
+			}
+			return source.getName() + " attacks " + getName() + " with "
+					+ tool.getName(); // TODO Auto-generated method stub
+
 		}
-		return source.getName() + " attacks " + getName() + " with " + tool.getName();		// TODO Auto-generated method stub
-		
 	}
 
 }

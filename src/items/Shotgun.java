@@ -16,5 +16,8 @@ public class Shotgun extends Weapon {
 		atk = 40;
 		usetime = 10;
 	}
-	
+	public String use(Living source) {
+		// TODO Auto-generated method stub
+			return null;
+		}	
 }
