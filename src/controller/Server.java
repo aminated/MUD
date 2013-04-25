@@ -51,7 +51,7 @@ public class Server extends Thread {
 			}
 			
 			// New Client has connected
-			Player player = new Player("temp", "password", 50, 2);
+			Player player = new Player("temp", "password", 1, 1, 1);
 			PlayerDisposition disposition = new PlayerDisposition(client, player);
 			player.setDisposition(disposition);
 			player.setRoom(spawnpoint);
@@ -104,7 +104,7 @@ public class Server extends Thread {
 		    List<Player> players = new ArrayList<Player>();
 		    
 		    // Adding a Player to use as a test
-		    Player test = new Player("TEST", "password", 1, 1);
+		    Player test = new Player("TEST", "password", 1, 1, 1);
 		    test.setRoom(roomDB.get(1));
 		    players.add(test);
 		    
