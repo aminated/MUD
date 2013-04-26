@@ -1,6 +1,7 @@
 package items;
 
 import model.Living;
+import model.Targetable;
 
 /**
  * The Hammer is the worst melee Weapon in the game but it can also be used with
@@ -8,17 +9,22 @@ import model.Living;
  */
 public class Hammer extends Weapon {
 
+	private Sledgehammer Sledgehammer;
 	public Hammer(){
 		
 		name = "Hammer";
-		description = "The Hammer is the worst melee Weapon in the game but it can also be used with wood to block windows and door exits of buildings.";
+		description = "The Hammer is the worst melee Weapon in the game but it can also be used with wood to forge the sledgehammer.";
 		weight = 20;
-		atk = 10;
+		atk = 8;
 		usetime = 30;
 	}
-		// TODO Auto-generated constructor stub
-	public String use(Living source) {
+	public String useItem(Living source, Wood Wood) {
+		source.removeItem(this);
+		source.removeItem(Wood);
+		source.addItem(Sledgehammer);
 		// TODO Auto-generated method stub
-			return null;
-		}
+		return "You forged items successfully!";
+	}
+
+	
 }

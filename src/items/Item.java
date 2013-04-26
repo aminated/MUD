@@ -10,7 +10,6 @@ public abstract class Item implements Targetable {
 	protected String name;
 	protected String description;
 	protected int weight;
-
 	protected int usetime;
 
 	public Item(String name, String description, int weight, int usetime){
@@ -21,7 +20,8 @@ public abstract class Item implements Targetable {
 		this.usetime = usetime;
 	}
 	public Item(){
-		
+
+
 	}
 	public String getName() {
 		return name;
@@ -51,16 +51,13 @@ public abstract class Item implements Targetable {
 		source.removeItem(this);
 		return "Drop "+ name + " successfully!";
 	}
-
+	@Override
 	public String useItem(Living source, Item tool) {
 		// TODO Auto-generated method stub
-		if(tool.getUsetime()!=0){
-			usetime--;
-			return "You use "+ tool.getName()+ " !";}
-			else
-				return "You cannot use it!";
-		}
+		return null;
+	}
 
+	
 	/**
 	 * When someone types "use" with an item in their inventory. 
 	 * Ex: use Health-potion

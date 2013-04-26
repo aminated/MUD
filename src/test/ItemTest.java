@@ -14,6 +14,7 @@ import items.Shotgun;
 import items.Sword;
 
 import model.Living;
+import model.Monster;
 import model.Player;
 
 import org.junit.Test;
@@ -22,24 +23,27 @@ public class ItemTest {
 
 	@Test
 	public void testBat() {
-		Bat a = new Bat("Bat", "The baseball Bat is an average melee Weapon.", 10, 30);
+		Bat a = new Bat();
 		assertEquals("Bat",a.getName());
 		assertEquals(10, a.getWeight());
 		assertEquals("The baseball Bat is an average melee Weapon.", a.getDescription());
-		assertEquals(5, a.getAtkdmg());
+		assertEquals(10, a.getAtkdmg());
 		assertEquals(30,a.getUsetime());
-		Living source = new Monster("Monster",50);
-		Living source1 = new Monster("Wang",50);
+		Living source = new Monster("Monster",50,5);
+		Living source1 = new Monster("Wang",50,10);
 		assertEquals("Add Bat successfully!", a.activate(source));
 		assertEquals("Wang attacks Monster with Bat", source.useItem(source1, a));
+		assertEquals("Weapons need a target to use!", a.use(source1));
+		assertEquals("You use Bat!",a.use(source1, source));
+		assertEquals(29,a.getUsetime());
 	}
 	@Test
 	public void testHammer() {
 		Hammer a = new Hammer();
 		assertEquals("Hammer",a.getName());
 		assertEquals(20, a.getWeight());
-		assertEquals("The Hammer is the worst melee Weapon in the game but it can also be used with wood to block windows and door exits of buildings.", a.getDescription());
-		assertEquals(10, a.getAtkdmg());
+		assertEquals("The Hammer is the worst melee Weapon in the game but it can also be used with wood to forge the sledgehammer.", a.getDescription());
+		assertEquals(8, a.getAtkdmg());
 		assertEquals(30,a.getUsetime());
 	}
 	@Test
@@ -57,7 +61,7 @@ public class ItemTest {
 		assertEquals("Rifle",a.getName());
 		assertEquals(35, a.getWeight());
 		assertEquals("The Rifle is the most accurate and powerful ranged Weapon, but has a small magazine size,is loud, and is very rare.", a.getDescription());
-		assertEquals(55, a.getAtkdmg());
+		assertEquals(50, a.getAtkdmg());
 		assertEquals(10,a.getUsetime());
 }
 	@Test

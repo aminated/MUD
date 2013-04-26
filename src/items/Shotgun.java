@@ -1,6 +1,7 @@
 package items;
 
 import model.Living;
+import model.Targetable;
 
 /**
  * The Shotgun is very powerful, but is almost useless when firing in to a
@@ -16,8 +17,5 @@ public class Shotgun extends Weapon {
 		atk = 40;
 		usetime = 10;
 	}
-	public String use(Living source) {
-		// TODO Auto-generated method stub
-			return null;
-		}	
+
 }

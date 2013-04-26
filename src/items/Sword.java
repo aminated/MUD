@@ -1,6 +1,7 @@
 package items;
 
 import model.Living;
+import model.Targetable;
 
 /**
  * The Sword is the best melee Weapon in the game and has high chance to kill
@@ -17,10 +18,7 @@ public class Sword extends Weapon {
 		usetime = 30;
 	}
 
-	public String use(Living source) {
-		// TODO Auto-generated method stub
-			return null;
-		}
+
 
 
 	// public killwithonehit()

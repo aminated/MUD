@@ -16,8 +16,5 @@ public class Rifle extends Weapon {
 		usetime = 10;
 		// TODO Auto-generated constructor stub
 	}
-	public String use(Living source) {
-		// TODO Auto-generated method stub
-			return null;
-		}
+
 }

@@ -12,7 +12,7 @@ public class Key extends Item{
 
 
 	@Override
-	public String useItem(Living source, Item tool) {
+	public String use(Living source) {
 		// TODO Auto-generated method stub
 		return null;
 	}

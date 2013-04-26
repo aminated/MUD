@@ -8,14 +8,14 @@ public class StaminaTablet extends Item {
 		name = "Stamina Tablet";
 		description = "A Stamina tablet can increase player's 15 maxHP.";
 		weight = 2;
-		usetime =1;
+		usetime = 1;
 	}
 
 	@Override
-	public String useItem(Living source, Item tool) {
-		// TODO Auto-generated method stub
-		// Living's HP increases 25
-		return "HP recovers 25!";
+	public String use(Living source) {
+		source.increaseMaxHP(25);
+		source.removeItem(this);
+		return "Your MaxHP has increased 25!";
 	}
 
 }

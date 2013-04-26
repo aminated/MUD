@@ -13,7 +13,7 @@ import model.Targetable;
 public abstract class Living implements Targetable {
 	protected int base_hp;
 	protected int hp;
-	private int base_atk;
+	protected int base_atk;
 	private Room room;
 	private String name;
 	private Disposition disposition = null;
@@ -75,5 +75,9 @@ public abstract class Living implements Targetable {
 		hp+=heal;
 		if (hp>base_hp)
 			hp=base_hp;
+	}
+	public void increaseMaxHP(int increase){
+		base_hp+=increase;
+		hp+=increase;
 	}
 }

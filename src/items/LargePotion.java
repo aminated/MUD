@@ -13,14 +13,13 @@ public class LargePotion extends Item {
 		weight = 5;
 		usetime = 1;
 	}
-	
-	@Override
-	public String useItem(Living source, Item tool) {
-		// TODO Auto-generated method stub
-		// Living's HP increases 50
-		
-		return "HP recovers 50!";
-	}
 
+	@Override
+	public String use(Living source) {
+			source.heal(50);
+			source.removeItem(this);
+			return "You recover 50HP!";		
+		}
+		
+	}
 	
-}

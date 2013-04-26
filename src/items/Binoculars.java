@@ -20,15 +20,10 @@ public class Binoculars extends Item {
 	}
 
 
-	
-
-	
 	@Override
-	public String useItem(Living source, Item tool) {
-		
-		//source.getRoom()
+	public String use(Living source) {
+		// TODO Auto-generated method stub
 		return null;
-		
 	}
 
 }

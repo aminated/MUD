@@ -1,6 +1,7 @@
 package items;
 
 import model.Living;
+import model.Targetable;
 
 /**
  * The Handgun deals the least amount of damage among all projectile based
@@ -18,8 +19,5 @@ public class Handgun extends Weapon {
 		usetime = 20;
 	
 	}
-	public String use(Living source) {
-		// TODO Auto-generated method stub
-			return null;
-		}
 }
+	

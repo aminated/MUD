@@ -10,7 +10,11 @@ public class TeleportationScroll extends Item{
 		weight = 5;
 		usetime = 1;
 	}
-	public String useItem(Living source, Item tool) {
-	return null;
+
+	@Override
+	public String use(Living source) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+	
 }

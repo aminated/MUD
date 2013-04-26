@@ -14,12 +14,12 @@ public class SmallPotion extends Item {
 		usetime =1;
 	}
 
-	@Override
-	public String useItem(Living source, Item tool) {
-		// TODO Auto-generated method stub
-		// Living's HP increases 25
-		return "HP recovers 25!";
-	}
 
+	@Override
+	public String use(Living source) {
+			source.heal(25);
+			source.removeItem(this);
+			return "You recover 25HP!";
+	}
 	
 }
