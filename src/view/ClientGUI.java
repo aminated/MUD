@@ -28,7 +28,6 @@ import javax.swing.JTextField;
  * Project Manager: Dylan
  *
  */
-
 @SuppressWarnings("serial")
 public class ClientGUI extends JFrame{
 	
@@ -198,6 +197,29 @@ public class ClientGUI extends JFrame{
 		serverPanel.add(portField);
 		
 		int result = JOptionPane.showConfirmDialog(null, serverPanel, "Server information", JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION) {
+			serverName = nameField.getText();
+			portNumber = portField.getText();
+		}
+	}
+	
+	/**
+	 * Opens a dialog box asking the user for a player name and password
+	 */
+	public void askForLogin() {
+		JTextField nameField = new JTextField(10);
+		JTextField portField = new JTextField(5);
+		nameField.setText("");
+		portField.setText("");
+		JPanel loginPanel = new JPanel();
+		  
+		loginPanel.add(new JLabel("Server Name:"));
+		loginPanel.add(nameField);
+		loginPanel.add(Box.createHorizontalStrut(15)); // a spacer
+		loginPanel.add(new JLabel("Port Number:"));
+		loginPanel.add(portField);
+		
+		int result = JOptionPane.showConfirmDialog(null, loginPanel, "Server information", JOptionPane.OK_CANCEL_OPTION);
 		if (result == JOptionPane.OK_OPTION) {
 			serverName = nameField.getText();
 			portNumber = portField.getText();

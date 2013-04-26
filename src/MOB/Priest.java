@@ -10,12 +10,12 @@ import model.Mob;
  */
 public class Priest extends Mob{
 
-	public Priest(String name, int base_hp, int base_atk) {
-		super(name, base_hp, base_atk);
+	public Priest(String name, int base_hp, int base_atk, int money) {
+		super(name, base_hp, base_atk, money);
 		setDisposition(new Healer(this));
 	}
 	public Priest(){
-		super("Priest",	50, 5);
+		super("Priest",	50, 5, 30);
 	}
 	
 	

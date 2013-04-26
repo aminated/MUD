@@ -9,8 +9,8 @@ import items.Weapon;
  */
 public class Mob extends Living{
 
-	public Mob(String name, int base_hp, int base_atk) {
-		super(name, base_hp, base_atk);
+	public Mob(String name, int base_hp, int base_atk, int money) {
+		super(name, base_hp, base_atk, money);
 		
 	}
 	

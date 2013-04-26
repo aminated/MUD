@@ -1,4 +1,5 @@
 package model;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,18 +11,22 @@ import model.Targetable;
 /**
  * The Living class pertains to any animate entity in the game. 
  */
-public abstract class Living implements Targetable {
+public abstract class Living implements Targetable, Serializable{
 	protected int base_hp;
 	protected int hp;
 	protected int base_atk;
+	private int money;
+
+
 	private Room room;
 	private String name;
 	private Disposition disposition = null;
 	private List<Item> items = new LinkedList<Item>();
-	public Living(String name, int base_hp, int base_atk){
+	public Living(String name, int base_hp, int base_atk, int money){
 		this.name = name;
 		this.hp = this.base_hp = base_hp;
-		this.base_atk=base_atk;
+		this.base_atk = base_atk;
+		this.money = money;
 	}
 	public Room getRoom() {
 		return room;
@@ -76,8 +81,27 @@ public abstract class Living implements Targetable {
 		if (hp>base_hp)
 			hp=base_hp;
 	}
+
 	public void increaseMaxHP(int increase){
 		base_hp+=increase;
 		hp+=increase;
+	}
+	public int getMoney(){
+		return money;
+	}
+	public void addMoney(int value){
+		money+=value;
+	}
+	/*
+	 * Source kills this Object and loot all things
+	 */
+	public String die(Living source){
+		getRoom().remove(this);
+		source.addMoney(this.getMoney());
+		for(Item thing: items){
+			source.addItem(thing);
+		}
+		return source.getName() + " kills " + getName();
+
 	}
 }

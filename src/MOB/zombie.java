@@ -8,12 +8,12 @@ import model.Mob;
  */
 public class Zombie extends Mob{
 
-	public Zombie(String name, int base_hp, int base_atk) {
-		super(name, base_hp, base_atk);
+	public Zombie(String name, int base_hp, int base_atk, int money) {
+		super(name, base_hp, base_atk, money);
 		setDisposition(new Hostile(this));
 	}
 	public Zombie(){
-		super("zombie",	15, 5);
+		super("zombie",	15, 5, 5);
 	}
 	
 	

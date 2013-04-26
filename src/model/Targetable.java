@@ -8,7 +8,7 @@ import items.Item;
  * @author Xiaoming Zhou
  * @author Zian Wang
  */
-public interface Targetable {
+public interface Targetable{
 	/**
 	 * @return A single word naming the object. Used by players to reference it in the game. 
 	 */
