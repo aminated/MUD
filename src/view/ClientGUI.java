@@ -40,8 +40,8 @@ public class ClientGUI extends JFrame{
 	private String gameName = "GAME NAME GOES HERE";
 	private String input;
 	
-	private String serverName = "";
-	private String portNumber = "";
+	private String SERVER_ADDRESS = "";
+	private String SERVER_PORT = "";
 	
 	private ObjectOutputStream netOut = null;
 	private Socket sock = null;
@@ -184,22 +184,22 @@ public class ClientGUI extends JFrame{
 	 * Opens a dialog box asking the user for a server name and port number
 	 */
 	public void askForServer() {
-		JTextField nameField = new JTextField(10);
+		JTextField addressField = new JTextField(10);
 		JTextField portField = new JTextField(5);
-		nameField.setText("localhost");
+		addressField.setText("localhost");
 		portField.setText("10042");
 		JPanel serverPanel = new JPanel();
 		  
-		serverPanel.add(new JLabel("Server Name:"));
-		serverPanel.add(nameField);
+		serverPanel.add(new JLabel("Server Address:"));
+		serverPanel.add(addressField);
 		serverPanel.add(Box.createHorizontalStrut(15)); // a spacer
 		serverPanel.add(new JLabel("Port Number:"));
 		serverPanel.add(portField);
 		
 		int result = JOptionPane.showConfirmDialog(null, serverPanel, "Server information", JOptionPane.OK_CANCEL_OPTION);
 		if (result == JOptionPane.OK_OPTION) {
-			serverName = nameField.getText();
-			portNumber = portField.getText();
+			SERVER_ADDRESS = addressField.getText();
+			SERVER_PORT = portField.getText();
 		}
 	}
 	
@@ -221,8 +221,8 @@ public class ClientGUI extends JFrame{
 		
 		int result = JOptionPane.showConfirmDialog(null, loginPanel, "Server information", JOptionPane.OK_CANCEL_OPTION);
 		if (result == JOptionPane.OK_OPTION) {
-			serverName = nameField.getText();
-			portNumber = portField.getText();
+			SERVER_ADDRESS = nameField.getText();
+			SERVER_PORT = portField.getText();
 		}
 	}
 	
@@ -253,7 +253,7 @@ public class ClientGUI extends JFrame{
 	public void start(){
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		try {
-			sock = new Socket(serverName, Integer.parseInt(portNumber));
+			sock = new Socket(SERVER_ADDRESS, Integer.parseInt(SERVER_PORT));
 			netOut = new ObjectOutputStream(sock.getOutputStream());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
