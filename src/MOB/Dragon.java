@@ -1,4 +1,4 @@
-package mob;
+package MOB;
 
 import disposition.Hostile;
 import model.Mob;

@@ -40,8 +40,8 @@ public class ClientGUI extends JFrame{
 	private String gameName = "GAME NAME GOES HERE";
 	private String input;
 	
-	private String SERVER_ADDRESS = "";
-	private String SERVER_PORT = "";
+	private String SERVER_ADDRESS = "localhost";
+	private String SERVER_PORT = "10042";
 	
 	private ObjectOutputStream netOut = null;
 	private Socket sock = null;
@@ -186,13 +186,13 @@ public class ClientGUI extends JFrame{
 	public void askForServer() {
 		JTextField addressField = new JTextField(10);
 		JTextField portField = new JTextField(5);
-		addressField.setText("localhost");
-		portField.setText("10042");
+		addressField.setText(SERVER_ADDRESS);
+		portField.setText(SERVER_PORT);
 		JPanel serverPanel = new JPanel();
 		  
 		serverPanel.add(new JLabel("Server Address:"));
 		serverPanel.add(addressField);
-		serverPanel.add(Box.createHorizontalStrut(15)); // a spacer
+		serverPanel.add(Box.createHorizontalStrut(15)); // Spacer
 		serverPanel.add(new JLabel("Port Number:"));
 		serverPanel.add(portField);
 		
