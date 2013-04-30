@@ -1,8 +1,10 @@
 package model;
 
+import java.io.Serializable;
+
 import items.Item;
 
-public class Door implements Targetable {
+public class Door implements Targetable, Serializable{
 	private Room source;
 	private Room dest; 
 	private Direction sourceDir; // Door's position in the source room.

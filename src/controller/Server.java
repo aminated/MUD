@@ -11,7 +11,11 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import MOB.Dragon;
+
+import model.CompanionDisposition;
 import model.Direction;
+import model.Mob;
 import model.Player;
 import model.PlayerDisposition;
 import model.Room;
@@ -124,17 +128,10 @@ public class Server extends Thread {
 			FileOutputStream bytesToDisk = new FileOutputStream("RoomDB");
 		    ObjectOutputStream outFile = new ObjectOutputStream(bytesToDisk);
 		    
-		    List<Room> rooms = new ArrayList<Room>();
+		    // Construct the world and assign to 'rooms'
+		    roomDB = constructWorld();
 		    
-		    // CREATE THE ROOMS HERE
-		    Room one = new Room("a forested area");
-		    Room two = new Room("a cabin");
-		    one.connect(two, Direction.North);
-		    
-		    rooms.add(one);
-		    rooms.add(two);
-		    
-		    outFile.writeObject(rooms);
+		    outFile.writeObject(roomDB);
 		    outFile.close();
 		} catch (IOException ioe) {
 			System.out.println("Writing Room database: FAILED");
@@ -142,6 +139,51 @@ public class Server extends Thread {
 		System.out.println("Writing Room dababase: SUCCESS");
 	}
 	
+	/**
+	 * Constructs the Rooms and returns them in a List<Room>
+	 * @return List<Room> is a list of all the Rooms in the game
+	 */
+	private List<Room> constructWorld() {
+		List<Room> rooms = new ArrayList<Room>();
+			    
+		// Create the Rooms
+		Room one = new Room("A blue-colored teleporter pad is on the west side of the room. \n Unfortunately, it's one-way.");
+		Room two = new Room("A dimly lit hallway");
+		Room three = new Room("A storage warehouse");
+		Room four = new Room("A sign reading 'spawnpoint teleporter' hangs above the east door. ");
+		
+		// Connect the Rooms
+		one.connect(two, Direction.North); 
+		two.connect(three, Direction.North);
+		three.connect(four, Direction.East);
+		four.connect(one, Direction.East);
+		
+		// Modify the Rooms
+		one.remove(one.getByName("West-door"));
+	    
+		// Add them to the List
+	    rooms.add(one);
+	    rooms.add(two);
+	    rooms.add(three);
+	    rooms.add(four);
+		
+	    return rooms;
+	}
+	
+	/*
+	 * Creates a few MOBs to demo the game
+	 */
+	public void runDemo(){
+		Mob robot = new Mob("Dog", 50, 1, 0);
+		robot.setDisposition(new CompanionDisposition(robot));
+		robot.setRoom(roomDB.get(1));
+		Mob dragon = new Dragon();
+		dragon.setRoom(roomDB.get(2));
+		getTimer().add(dragon);
+		getTimer().add(robot); //TODO: figure out a way to do this automatically
+		spawnpoint = roomDB.get(1);
+	}
+
 	/**
 	 * Reads the List of Rooms from the RoomDB file and assigns it to Server's roomDB
 	 */
@@ -151,8 +193,8 @@ public class Server extends Thread {
 	    	rawBytes = new FileInputStream("RoomDB");
 	    	ObjectInputStream inFile = new ObjectInputStream(rawBytes);
 
-	    	// Reads the List of Players
-	    	List<Player> roomDB = (ArrayList<Player>) inFile.readObject();
+	    	// Reads the List of Rooms
+	    	roomDB = (List<Room>) inFile.readObject();
 	    	
 	    	inFile.close();
 	    } catch (FileNotFoundException e) {
@@ -176,7 +218,7 @@ public class Server extends Thread {
 	    	ObjectInputStream inFile = new ObjectInputStream(rawBytes);
 
 	    	// Reads the List of Players
-	    	List<Player> playerDB = (ArrayList<Player>) inFile.readObject();   	
+	    	playerDB = (List<Player>) inFile.readObject();   	
 	    	
 	    	inFile.close();
 	    } catch (FileNotFoundException e) {
