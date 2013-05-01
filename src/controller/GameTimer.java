@@ -19,16 +19,20 @@ public class GameTimer {
 	          }
 	      }
 	  };
+	  
 	public GameTimer() {
 		timer = new Timer(DELAY, taskPerformer);
 		timer.addActionListener(taskPerformer);
 	}
+	
 	public void start(){
 		timer.start();
 	}
+	
 	public void add(Living l){
 		recipients.add(l);
 	}
+	
 	public void remove(Living l){
 		recipients.remove(l);
 	}

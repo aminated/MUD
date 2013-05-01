@@ -55,6 +55,8 @@ public class Server extends Thread {
 			}
 			
 			// New Client has connected
+			requestLogin(user);
+			
 			Player player = new Player("temp", "password", 1, 1, 1);
 			PlayerDisposition disposition = new PlayerDisposition(client, player);
 			player.setDisposition(disposition);

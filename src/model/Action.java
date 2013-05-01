@@ -10,6 +10,40 @@ import items.Item;
  *
  */
 public class Action {
+
+	private Living source;
+	private Targetable target;
+	private Item tool;
+	private boolean completed = false;
+	private String result; 
+	
+	/**
+	 * Parse a command and create an action. 
+	 */
+	public Action(Living source, String command){
+		this.source = source;
+		Pattern p = Pattern.compile("\\s*(use|on)\\s*", Pattern.CASE_INSENSITIVE);
+		String[] args = p.split(command);
+		String targetName = args[1];
+		System.out.println(targetName);
+		if(args.length == 3){
+			String toolName = args[2];
+		}
+		targetName = targetName.replaceAll("\\s", "");
+		this.target = source.getRoom().getByName(targetName);
+		
+	}
+	public Action(Living source, Targetable target){
+		this.source = source;
+		this.target = target;
+		this.tool = null;
+	}
+	public Action(Living source, Targetable target, Item tool){
+		this.source = source;
+		this.target = target;
+		this.tool = tool;
+	}
+	
 	/**
 	 * @return the source
 	 */
@@ -46,37 +80,7 @@ public class Action {
 	public void setTool(Item tool) {
 		this.tool = tool;
 	}
-	private Living source;
-	private Targetable target;
-	private Item tool;
-	private boolean completed = false;
-	private String result; 
-	/**
-	 * Parse a command and create an action. 
-	 */
-	public Action(Living source, String command){
-		this.source = source;
-		Pattern p = Pattern.compile("\\s*(use|on)\\s*", Pattern.CASE_INSENSITIVE);
-		String[] args = p.split(command);
-		String targetName = args[1];
-		System.out.println(targetName);
-		if(args.length == 3){
-			String toolName = args[2];
-		}
-		targetName = targetName.replaceAll("\\s", "");
-		this.target = source.getRoom().getByName(targetName);
-		
-	}
-	public Action(Living source, Targetable target){
-		this.source = source;
-		this.target = target;
-		this.tool = null;
-	}
-	public Action(Living source, Targetable target, Item tool){
-		this.source = source;
-		this.target = target;
-		this.tool = tool;
-	}
+
 	public String describe(){
 		if(completed)
 			return result;
