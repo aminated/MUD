@@ -19,7 +19,7 @@ public class Binoculars extends Item {
 		usetime = 5;
 	}
 
-
+// view any room nearby
 	@Override
 	public String use(Living source) {
 		// TODO Auto-generated method stub

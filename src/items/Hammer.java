@@ -22,7 +22,6 @@ public class Hammer extends Weapon {
 		source.removeItem(this);
 		source.removeItem(Wood);
 		source.addItem(Sledgehammer);
-		// TODO Auto-generated method stub
 		return "You forged items successfully!";
 	}
 

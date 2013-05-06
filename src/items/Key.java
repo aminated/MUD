@@ -10,7 +10,7 @@ public class Key extends Item{
 		usetime = 1;
 	}
 
-
+// open the door 
 	@Override
 	public String use(Living source) {
 		// TODO Auto-generated method stub

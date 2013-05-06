@@ -58,6 +58,7 @@ public abstract class Living implements Targetable, Serializable{
 		if(disposition != null)
 		disposition.notify(message);
 	}
+	
 	public void addItem(Item item) {
 		items.add(item);		
 	}
@@ -72,6 +73,9 @@ public abstract class Living implements Targetable, Serializable{
 	}
 	public String getName(){
 		return name;
+	}
+	public int getMaxhp(){
+		return base_hp;
 	}
 	public int getAtkdmg(){
 		return base_atk;

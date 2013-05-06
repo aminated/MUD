@@ -16,6 +16,7 @@ public class WalkieTalkie extends Item {
 		weight = 5;
 	}
 
+	// interact in the chat Panel
 	@Override
 	public String use(Living source) {
 		// TODO Auto-generated method stub

@@ -11,6 +11,7 @@ public class TeleportationScroll extends Item{
 		usetime = 1;
 	}
 
+	// teleport to a random room
 	@Override
 	public String use(Living source) {
 		// TODO Auto-generated method stub

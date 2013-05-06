@@ -11,6 +11,12 @@ public Sledgehammer(){
 		atk = 40;
 		usetime = 30;
 	}
-	
+
+//escape the dungeon
+@Override
+public String use(Living source) {
+	// TODO Auto-generated method stub
+	return null;
+}
 
 }

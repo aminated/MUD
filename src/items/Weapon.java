@@ -19,8 +19,6 @@ public abstract class Weapon extends Item {
 
 	protected int atk;
 
-
-
 	public String use(Living source) {
 		return "Weapons need a target to use!";
 	}
@@ -30,15 +28,13 @@ public abstract class Weapon extends Item {
 	}
 
 	public String use(Living source, Targetable target) {
-		if (usetime > 0) {
+		if (source.hasItem(this)) {
 			target.useItem(source, this);
 			usetime--;
+			if (usetime == 0)
+				source.removeItem(this);
 			return "You use " + this.getName() + "!";
-		} else {
-			source.removeItem(this);
-			return this.getName() + "has used up!";
-		}
-
+		} else
+			return "You do not have this item!";
 	}
-
 }

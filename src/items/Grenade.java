@@ -13,9 +13,5 @@ public class Grenade extends Weapon {
 		atk = 45;
 	}
 
-	public String use(Living source) {
-		// TODO Auto-generated method stub
-			return null;
-		}
 
 }

@@ -15,7 +15,9 @@ public class Wood extends Item {
 	@Override
 	public String use(Living source) {
 		// TODO Auto-generated method stub
-		return null;
+		return "Wood can only be used with hammer!";
 	}
+
+	
 	
 }

@@ -9,7 +9,7 @@ public class LargePotion extends Item {
 
 	public LargePotion() {
 		name = "Large Potion";
-		description = "A large potion can heal the player 50HP who is injured.";
+		description = "A large potion can heal the player's 50HP who is injured.";
 		weight = 5;
 		usetime = 1;
 	}
