@@ -147,12 +147,36 @@ public class PlayerDisposition extends Disposition{
 		};
 		commands.add(cmdUse);
 		
+		CommandParser cmdSay = new CommandParser(){
+			public String regex = "say";
+			public void invoke(){
+				String message = command.substring(4);
+				owner.getRoom().announce(owner.getName() + " says: " + message);
+			}
+		};
+		commands.add(cmdSay);
 		
+		CommandParser cmdTell = new CommandParser(){
+			public String regex = "tell";
+			public void invoke(){
+				String targetName = args[1];
+				Targetable target = owner.getRoom().getByName(targetName);
+				if(target == null || !(target instanceof Living)){
+					listener.puts("Error: no one named " + targetName + " in room.");
+					return;
+				}
+				Living receiver = (Living) target;
+				String message = command.substring(targetName.length() + 4);
+				receiver.sendMessage(message);
+			}
+		};
+		commands.add(cmdTell);
+				
 	}
 	public PlayerDisposition(Socket client, Player player){
 		super(player);
 		
-		
+		addCommands();
 		this.listener = new ClientConnection();
 		try {
 			listener.istream = new ObjectInputStream( client.getInputStream() );
