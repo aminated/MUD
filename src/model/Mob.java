@@ -28,10 +28,15 @@ public class Mob extends Living{
 
 	@Override
 	public String useItem(Living source, Item tool) {
-		source.sendMessage("You give " + tool.getName() + " to " + getName());
-		source.removeItem(tool);
-		this.addItem(tool);
-		return ""; // Give actions aren't publicly visible. 
+		if (tool instanceof Weapon){
+			return attack(source, (Weapon)tool);		// Don't give weapon to mobs, they will eat you
+		}
+		else{
+			source.sendMessage("You give " + tool.getName() + " to " + getName());
+			source.removeItem(tool);
+			this.addItem(tool);
+			return ""; // Give actions aren't publicly visible. 
+		}
 	}
 	public String attack(Living source, Weapon tool){
 		source.sendMessage("You attack " + getName() + "by " + tool.getName());

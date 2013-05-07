@@ -11,6 +11,7 @@ public class Drow extends Mob{
 	}
 	public Drow(){
 		super("Drow", 50, 20, 50);
+		setDisposition(new Hostile(this));
 	}
 	
 

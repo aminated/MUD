@@ -11,6 +11,7 @@ public class Werewolf extends Mob{
 	}
 	public Werewolf(){
 		super("Werewolf", 100, 15, 30);
+		setDisposition(new Hostile(this));
 	}
 	
 

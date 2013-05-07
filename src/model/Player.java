@@ -4,6 +4,7 @@ import items.Item;
 
 
 import disposition.Healer;
+import disposition.Hostile;
 
 /**
  * The Player is a user controlled Living being.
@@ -29,6 +30,11 @@ public class Player extends Living{
 			heal(50);
 			return source.getName() + " heals " + getName() + "50 HP";
 		}
+		else 
+			if (source.getDisposition() instanceof Hostile){
+				this.hp-=source.getAtkdmg();
+				return source.getName() + "attack" + getName() + source.getAtkdmg();
+			}
 		source.sendMessage("You poke " + getName());
 		return source.getName() + " pokes " + getName();
 	}

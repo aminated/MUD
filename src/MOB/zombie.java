@@ -14,6 +14,7 @@ public class Zombie extends Mob{
 	}
 	public Zombie(){
 		super("zombie",	15, 5, 5);
+		setDisposition(new Hostile(this));
 	}
 	
 	

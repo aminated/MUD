@@ -11,6 +11,7 @@ public class Troll extends Mob{
 	}
 	public Troll(){
 		super("Troll", 120, 15, 30);
+		setDisposition(new Hostile(this));
 	}
 	
 	

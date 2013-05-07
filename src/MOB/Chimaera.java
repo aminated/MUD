@@ -11,6 +11,7 @@ public class Chimaera extends Mob{
 	}
 	public Chimaera(){
 		super("CHimaera", 150, 25, 30);
+		setDisposition(new Hostile(this));
 	}
 
 }

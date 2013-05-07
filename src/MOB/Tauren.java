@@ -11,6 +11,7 @@ public class Tauren extends Mob{
 	}
 	public Tauren(){
 		super("Tauren", 200, 20, 50);
+		setDisposition(new Hostile(this));
 	}
 
 }

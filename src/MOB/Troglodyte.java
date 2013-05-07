@@ -11,6 +11,7 @@ public class Troglodyte extends Mob{
 	}
 	public Troglodyte(){
 		super("Troglodyte", 30, 5, 5);
+		setDisposition(new Hostile(this));
 	}
 	
 	

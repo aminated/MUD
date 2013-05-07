@@ -11,6 +11,7 @@ public class Vampire extends Mob{
 	}
 	public Vampire(){
 		super("Vampire", 100, 15, 100);
+		setDisposition(new Hostile(this));
 	}
 	
 

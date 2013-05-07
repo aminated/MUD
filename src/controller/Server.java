@@ -11,7 +11,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import MOB.Dragon;
+import mob.Dragon;
 
 import model.CompanionDisposition;
 import model.Direction;
@@ -55,7 +55,7 @@ public class Server extends Thread {
 			}
 			
 			// New Client has connected
-			requestLogin(user);
+			//requestLogin(user);
 			
 			Player player = new Player("temp", "password", 1, 1, 1);
 			PlayerDisposition disposition = new PlayerDisposition(client, player);

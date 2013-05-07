@@ -11,6 +11,7 @@ public class Goblin extends Mob{
 	}
 	public Goblin(){
 		super("Goblin", 15, 5, 10);
+		setDisposition(new Hostile(this));
 	}
 
 }

@@ -1,4 +1,4 @@
-package MOB;
+package mob;
 
 import disposition.Hostile;
 import model.Mob;
@@ -15,6 +15,7 @@ public class Dragon extends Mob{
 	}
 	public Dragon(){
 		super("Dragon",	500, 50, 500);
+		setDisposition(new Hostile(this));
 	}
 	
 	

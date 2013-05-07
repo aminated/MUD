@@ -16,6 +16,7 @@ public class Priest extends Mob{
 	}
 	public Priest(){
 		super("Priest",	50, 5, 30);
+		setDisposition(new Healer(this));
 	}
 	
 	

@@ -13,13 +13,15 @@ public abstract class Item implements Targetable, Serializable {
 	protected String description;
 	protected int weight;
 	protected int usetime;
+	private int value;
 
-	public Item(String name, String description, int weight, int usetime) {
+	public Item(String name, String description, int weight, int usetime, int value) {
 
 		this.name = name;
 		this.description = description;
 		this.weight = weight;
 		this.usetime = usetime;
+		this.value = value;
 	}
 
 	public Item() {
@@ -42,6 +44,9 @@ public abstract class Item implements Targetable, Serializable {
 		return usetime;
 	}
 
+	public int getValue() {
+		return value;
+	}
 	public String activate(Living source) {
 		if (!source.hasItem(this)) {
 			return "You do not have this item!";
