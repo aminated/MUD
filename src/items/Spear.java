@@ -11,5 +11,6 @@ public class Spear extends Weapon {
 		weight = 10;
 		usetime = 1;
 		atk = 25;
+		value = 150;
 	}
 }

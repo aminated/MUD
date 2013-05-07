@@ -8,6 +8,7 @@ public class Key extends Item{
 		description = "The key can only open the door for the Boss Room.";
 		weight = 5;
 		usetime = 1;
+		value = 50;
 	}
 
 // open the door 

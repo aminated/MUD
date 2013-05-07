@@ -16,6 +16,7 @@ public class Shotgun extends Weapon {
 		weight = 30;
 		atk = 40;
 		usetime = 10;
+		value = 700;
 	}
 
 }

@@ -8,8 +8,8 @@ import model.Targetable;
  */
 public abstract class Weapon extends Item {
 
-	public Weapon(String name, String description, int weight, int usetime) {
-		super(name, description, weight, usetime);
+	public Weapon(String name, String description, int weight, int usetime, int value) {
+		super(name, description, weight, usetime, value);
 		// TODO Auto-generated constructor stub
 	}
 

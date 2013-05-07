@@ -12,6 +12,7 @@ public class FullHealthPotion extends Item {
 		description = "A  FullHealth Potion can heal the player's full health who is injured.";
 		weight = 5;
 		usetime = 1;
+		value = 200;
 	}
 
 	@Override

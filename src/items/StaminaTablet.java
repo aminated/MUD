@@ -9,6 +9,7 @@ public class StaminaTablet extends Item {
 		description = "A Stamina tablet can increase player's 15 maxHP.";
 		weight = 2;
 		usetime = 1;
+		value = 800;
 	}
 
 	@Override

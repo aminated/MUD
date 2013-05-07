@@ -10,6 +10,7 @@ public Sledgehammer(){
 		weight = 20;
 		atk = 40;
 		usetime = 30;
+		value = 500;
 	}
 
 //escape the dungeon

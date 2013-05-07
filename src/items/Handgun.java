@@ -17,7 +17,7 @@ public class Handgun extends Weapon {
 		weight = 15;
 		atk = 20;
 		usetime = 20;
-	
+		value = 300;
 	}
 }
 	

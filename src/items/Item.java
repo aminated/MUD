@@ -13,7 +13,7 @@ public abstract class Item implements Targetable, Serializable {
 	protected String description;
 	protected int weight;
 	protected int usetime;
-	private int value;
+	protected int value;
 
 	public Item(String name, String description, int weight, int usetime, int value) {
 

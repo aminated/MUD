@@ -17,6 +17,7 @@ public class Hammer extends Weapon {
 		weight = 20;
 		atk = 8;
 		usetime = 30;
+		value = 50;
 	}
 	public String useItem(Living source, Wood Wood) {
 		source.removeItem(this);

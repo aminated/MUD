@@ -10,6 +10,7 @@ public class Wood extends Item {
 		description = "Wood can only be used with hammer to block windows and door exits of buildings.";
 		weight = 1;
 		usetime = 1;
+		value = 30;
 	}
 
 	@Override

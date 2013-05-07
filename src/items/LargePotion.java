@@ -12,6 +12,7 @@ public class LargePotion extends Item {
 		description = "A large potion can heal the player's 50HP who is injured.";
 		weight = 5;
 		usetime = 1;
+		value = 100;
 	}
 
 	@Override

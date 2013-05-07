@@ -10,7 +10,7 @@ public class Bow extends Weapon {
 		weight = 15;
 		atk = 15;
 		usetime = 50;
-	
+		value = 100;
 	}
 }
 	
