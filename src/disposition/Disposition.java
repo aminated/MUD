@@ -24,6 +24,10 @@ public abstract class Disposition implements Serializable{
 	public Disposition(Living owner){
 		this.owner = owner;
 	}
+	
+	public Living getOwner(){
+		return owner;
+	}
 	public boolean hasNext(){
 		return !queue.isEmpty();
 	}

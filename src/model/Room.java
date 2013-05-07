@@ -75,7 +75,7 @@ public class Room implements Serializable{
 			return null;
 		else{
 			Random rn = new Random();
-			int i = rn.nextInt() % contents.size();
+			int i = Math.abs(rn.nextInt()) % contents.size();
 			return contents.get(i);
 		}
 	}

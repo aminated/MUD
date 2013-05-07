@@ -2,6 +2,7 @@ package disposition;
 
 import items.Item;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,8 +17,8 @@ import model.Targetable;
  * Hostile Mobs will always attack players
  */
 public class Hostile extends Disposition {
-	protected List<Action> queue = new LinkedList<Action>();
-	protected Living owner;
+	private List<Action> queue = new LinkedList<Action>();
+	private Living owner;
 	protected void addAction(Action todo){
 		queue.add(todo);
 	}
@@ -44,13 +45,20 @@ public class Hostile extends Disposition {
 	 * 
 	 */
 	public void attack(){
-		Targetable prey=owner.getRoom().seek();
+		Living owner=this.getOwner();
+		try{
+		Room aRoom=owner.getRoom();
+		Targetable prey=aRoom.seek();
 		if (prey==null || prey instanceof Item)
 			leave();	// If the room is empty (A room without door, weird) or prey is not living thing, Mob leaves this room.
 		else
 		if (prey instanceof Living){
 			if (((Living) prey).getDisposition() instanceof Friendly || prey instanceof Player)
 				addAction( new Action(owner, prey));
+		
+			}
+		} catch(NullPointerException e){
+			System.out.print(owner);
 		}
 	}
 	public void leave(){
