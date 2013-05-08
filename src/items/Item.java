@@ -50,7 +50,7 @@ public abstract class Item implements Targetable, Serializable {
 	public String activate(Living source) {
 		if (!source.hasItem(this)) {
 			source.sendMessage("You do not have this item!");
-			return "Do not have this item";
+			return "";
 		} else {
 			return use(source);
 

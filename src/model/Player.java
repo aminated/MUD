@@ -67,14 +67,7 @@ public class Player extends Living{
 		return source.getName() + " pokes " + getName();
 	}
 
-	@Override
-	public String useItem(Living source, Item tool) {
-		
-		source.sendMessage("You give " + tool.getName() + " to " + getName());
-		source.removeItem(tool);
-		this.addItem(tool);
-		return ""; // Give actions aren't publicly visible. 
-	}
+
 	
 	public String useItem(Item tool) {
 		if(tool instanceof SmallPotion && this.hasItem(tool)){

@@ -6,6 +6,7 @@ import java.util.List;
 import disposition.Disposition;
 
 import items.Item;
+import items.Weapon;
 import model.Targetable;
 
 /**
@@ -124,8 +125,23 @@ public abstract class Living implements Targetable, Serializable{
 	public void addMoney(int value){
 		money+=value;
 	}
-	public void setName(String newName){
-		this.name = newName;
+	public String useItem(Living source, Item tool){
+		if(tool instanceof Weapon){
+			Weapon weapon = (Weapon) tool;
+			int damage = weapon.getAtkdmg() * source.getAtkdmg();
+			hp -= damage;
+			String message = source.getName() + " attacks " + this.getName() + " with " + tool.getName()
+					+ " for " + damage + " damage.\n";
+			if(hp < 0)
+				message += die(source) + "\n";
+			return message;
+			 
+
+		}
+		else{
+			source.sendMessage("Cannot use this item on a living creature. Do you mean 'give'? ");
+			return "";
+		}
 	}
 	/*
 	 * Source kills this Object and loot all things

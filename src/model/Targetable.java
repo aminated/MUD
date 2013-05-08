@@ -35,8 +35,7 @@ public interface Targetable{
 	 */
 	public String useItem(Living source, Item tool);
 	
-	public String useItem(Item tool);
-	
-	public String useItem(Item tool1, Item tool2);
-
+	//public String useItem(Item tool);
+	//Targetables and items cannot be expected to do things on their own. Need a Living for that.
+	//Example: Door.useItem(Key)? Who opened it?
 }
