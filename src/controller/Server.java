@@ -25,15 +25,23 @@ import model.Room;
 import view.ClientGUI;
 
 public class Server extends Thread {
+	public static Server instance = null;
+	public static Server getServer(){
+		if(instance == null) instance = new Server();
+		return instance;
+	}
+	private Server(){
+		
+	}
 	private ServerSocket sock;
 	public Room spawnpoint;
 	private static int PORT_NUM = 10042;
 	private int playerCount = 0;
-	private GameTimer timer = new GameTimer();
+	private GameTimer timer = GameTimer.getTimer();
 	private List<Player> loggedIn;
 	private List<Player> playerDB;
 	private List<Room> roomDB;
-
+	
 	public GameTimer getTimer() {
 		return timer;
 	}
@@ -373,5 +381,16 @@ public class Server extends Thread {
 	 */
 	public void displayHelp(ClientGUI client) {
 		client.displayGameOutput("\n\nHELP GOES HERE\n\n");
+	}
+	public void shutdown(){
+		System.out.println("Shutting down.");
+		for(Player user: loggedIn){
+			timer.remove(user);
+			PlayerDisposition disposition = (PlayerDisposition) user.getDisposition();
+			disposition.disconnect();
+		}
+		savePlayers();
+		saveRooms();
+		System.exit(0);
 	}
 }

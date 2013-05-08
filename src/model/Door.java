@@ -9,6 +9,9 @@ public class Door implements Targetable, Serializable{
 	private Room dest; 
 	private Direction sourceDir; // Door's position in the source room.
 	private Direction destDir; // Door's position in the destination room. 
+	public Room getDest(){
+		return dest;
+	}
 	public Door(Room source, Room dest, Direction d){
 		this.source = source;
 		this.dest = dest;

@@ -9,6 +9,11 @@ import java.util.List;
 import javax.swing.Timer;
 
 public class GameTimer {
+    private static GameTimer instance;
+    public static GameTimer getTimer(){
+    	if(instance == null) instance = new GameTimer();
+    	return instance;
+    }
 	private static int DELAY = 2000; // Delay in milliseconds.
 	private List<Living> recipients = new LinkedList<Living>();
 	private Timer timer;
@@ -20,7 +25,7 @@ public class GameTimer {
 	      }
 	  };
 	  
-	public GameTimer() {
+	private GameTimer() {
 		timer = new Timer(DELAY, taskPerformer);
 		timer.addActionListener(taskPerformer);
 	}
@@ -35,6 +40,9 @@ public class GameTimer {
 	
 	public void remove(Living l){
 		recipients.remove(l);
+	}
+	public List<Living> getOnline(){
+		return recipients;
 	}
 
 }

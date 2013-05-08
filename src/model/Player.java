@@ -15,6 +15,7 @@ public class Player extends Living{
 	private String password;
 	private GiveAction receiving = null;
 	private GiveAction giving = null;
+	private Item equippedWeapon = null;
 	public GiveAction getReceiving() {
 		return receiving;
 	}

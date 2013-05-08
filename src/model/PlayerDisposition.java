@@ -1,6 +1,7 @@
 package model;
 
 import items.Item;
+import items.Weapon;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -10,6 +11,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import controller.GameTimer;
+import controller.Server;
 import controller.Stream;
 import disposition.Disposition;
 
@@ -48,8 +52,11 @@ public class PlayerDisposition extends Disposition{
 					parser.invoke();
 				}
 				}
-				catch(Throwable e){
+				catch(InvalidNameException e){
 					puts(e.getMessage());
+				}
+				catch(Throwable e){
+					puts("Invalid command syntax. \n");
 				}
 				/*
 				if(command.equals("look"))
@@ -69,6 +76,11 @@ public class PlayerDisposition extends Disposition{
 		}
 	}
 	private List<CommandParser> commands = new LinkedList<CommandParser>();
+	private String capitalize(String string){
+		char[] charArray = string.toCharArray();
+		charArray[0] = Character.toUpperCase(charArray[0]);
+		return new String(charArray);
+	}
 	private abstract class CommandParser implements Cloneable {
 		public String regex;
 		public String command;
@@ -126,11 +138,7 @@ public class PlayerDisposition extends Disposition{
 		};
 		commands.add(cmdInventory);
 		CommandParser cmdMove = new CommandParser("(north|south|east|west)"){
-			private String capitalize(String string){
-				char[] charArray = string.toCharArray();
-				charArray[0] = Character.toUpperCase(charArray[0]);
-				return new String(charArray);
-			}
+
 			public void invoke(){
 				String dir = capitalize(args[0]);
 				String doorName = dir + "-door";
@@ -142,6 +150,11 @@ public class PlayerDisposition extends Disposition{
 			public void invoke(){
 				if(args.length == 1)
 					listener.puts(owner.getRoom().describe());
+				else{
+					Door door = (Door) owner.getRoom().getByName(args[1]);
+					listener.puts("The door leads to: \n");
+					listener.puts(door.getDest().describe());
+				}
 				// TODO: Implement Look command taking arguments. 
 			}
 		};
@@ -188,8 +201,8 @@ public class PlayerDisposition extends Disposition{
 					return;
 				}
 				Living receiver = (Living) target;
-				String message = command.substring(targetName.length() + 4);
-				receiver.sendMessage(message);
+				String message = command.substring(targetName.length() + 5);
+				receiver.sendMessage(owner.getName() + ": " + message);
 			}
 		};
 		commands.add(cmdTell);
@@ -241,6 +254,68 @@ public class PlayerDisposition extends Disposition{
 		};
 		commands.add(cmdGet);
 		
+		CommandParser cmdEquip = new CommandParser("equip"){
+			public void invoke(){
+				String itemName = args[1];
+				Item item = owner.getItem(itemName);
+				if(!(item instanceof Weapon)){ listener.puts(itemName + " is not a weapon!\n");
+				return;
+				}
+				owner.equipped = item;
+				listener.puts("You equipped " + itemName + "\n");
+			}
+		};
+		commands.add(cmdEquip);
+		CommandParser cmdAttack = new CommandParser("attack"){
+			public void invoke(){
+				String targetName = args[1];
+				Targetable target = owner.getRoom().getByName(targetName);
+				Item weapon = owner.equipped;
+				target.useItem(owner, weapon);
+			}
+		};
+		commands.add(cmdAttack);
+		CommandParser oop = new CommandParser("oop"){
+			public void invoke(){
+				String message = command.substring(4);
+				GameTimer timer = GameTimer.getTimer();
+				List<Living> recipients = timer.getOnline();
+				for(Living l: recipients){
+					l.sendMessage(owner.getName() + " [OOP]: " + message);
+				}
+			}
+		};
+		commands.add(oop);
+		CommandParser cmdShutdown = new CommandParser("shutdown"){
+			public void invoke(){
+				Player sender = (Player) owner;
+				if(!sender.isAdmin()){
+					listener.puts("Not admin. \n");
+					System.out.println(sender.getDescription() + " attempted server shutdown. ");
+					return;
+				}
+				Server server = Server.getServer();
+				server.shutdown();
+				
+			}
+		};
+		CommandParser cmdCommands = new CommandParser("(help|commands)"){
+			public void invoke(){
+				String message = "Commands available: \n" +
+						"inventory: List items in your inventory. \n" +
+						"north/south/east/west: Go through a door in the direction, if you can \n" +
+						"look: See what's inside your current room. \n" +
+						"look <door name>: Look through a door to another room. \n" +
+						"use <target>: Interact with an object or creature in your inventory or the current room. \n" +
+						"use <item> on <target>: Use an item in your inventory on something. May be used with weapons to attack \n" +
+						"say <message>: Say a message to everyone in the room. \n" +
+						"tell <creature> <message>: Say something to someone in the room in secret. " +
+						"get <item> from <creature>: Ask someone to give you an item, or take it if they offered it already. \n" +
+						"give <item> to <creature>: Offer someone an item, or give it to someone who asked. \n" +
+						"equip <weapon>: Use an item by default to attack \n" +
+						"attack <creature>: Attack someone with your equipped item. \n";
+			}
+		};
 	}
 	public PlayerDisposition(Stream client, Player player){
 		super(player);
@@ -250,6 +325,16 @@ public class PlayerDisposition extends Disposition{
 		listener.istream =  client.in ;
 		listener.ostream =  client.out ;
 		listener.start();
+	}
+	public void disconnect(){
+		listener.puts("Disconnected.");
+		try {
+			listener.istream.close();
+			listener.ostream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	@Override
 	public void notify(Action event) {
