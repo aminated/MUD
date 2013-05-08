@@ -313,7 +313,8 @@ public class PlayerDisposition extends Disposition{
 						"get <item> from <creature>: Ask someone to give you an item, or take it if they offered it already. \n" +
 						"give <item> to <creature>: Offer someone an item, or give it to someone who asked. \n" +
 						"equip <weapon>: Use an item by default to attack \n" +
-						"attack <creature>: Attack someone with your equipped item. \n";
+						"attack <creature>: Attack someone with your equipped item. \n" +
+						"oop <message>: Send an out-of-game message to all players connected \n";
 			}
 		};
 	}

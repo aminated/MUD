@@ -248,16 +248,18 @@ public class Server extends Thread {
 	 */
 	private List<Room> constructWorld() {
 		List<Room> rooms = new ArrayList<Room>();
-
+		Room zero, one, two, three, four;
 		// Create the Rooms
-		Room one = new Room(
-				"A blue-colored teleporter pad is on the west side of the room. \n Unfortunately, it's one-way.");
-		Room two = new Room("A dimly lit hallway");
-		Room three = new Room("A storage warehouse");
-		Room four = new Room(
-				"A sign reading 'spawnpoint teleporter' hangs above the east door. ");
-
+		rooms.add( zero = new Room("An utterly plain room, 5x5x5 m, white, with no interesting features. It looks like a 3D modeler's dream. "));
+		rooms.add( one = new Room(
+				"A blue-colored teleporter pad is on the west side of the room. \n Unfortunately, it's one-way.") );
+		rooms.add( two = new Room("A dimly lit hallway") );
+		rooms.add(  three = new Room("A storage warehouse") );
+		rooms.add(  four = new Room(
+				"A sign reading 'spawnpoint teleporter' hangs above the east door. "));
+		
 		// Connect the Rooms
+		zero.connect(one, Direction.North);
 		one.connect(two, Direction.North);
 		two.connect(three, Direction.North);
 		three.connect(four, Direction.East);
@@ -265,13 +267,8 @@ public class Server extends Thread {
 
 		// Modify the Rooms
 		one.remove(one.getByName("West-door"));
-
-		// Add them to the List
-		rooms.add(one);
-		rooms.add(two);
-		rooms.add(three);
-		rooms.add(four);
-
+		
+		
 		return rooms;
 	}
 

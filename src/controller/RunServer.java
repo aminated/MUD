@@ -13,8 +13,8 @@ public class RunServer {
 		Server server = Server.getServer();
 		
 		server.start();
-	//	server.initializeRoomDatabase();
-	//	server.initializePlayerDatabase();
+		server.initializeRoomDatabase();
+		server.initializePlayerDatabase();
 		try{
 		server.loadRoomDB();
 		server.loadPlayerDB();
