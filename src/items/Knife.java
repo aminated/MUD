@@ -10,7 +10,7 @@ public class Knife extends Weapon {
 		weight = 5;
 		atk = 5;
 		usetime = 50;
-	
+		value = 100;
 	}
 }
 	

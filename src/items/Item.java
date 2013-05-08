@@ -13,7 +13,7 @@ public abstract class Item implements Targetable, Serializable {
 	protected String description;
 	protected int weight;
 	protected int usetime;
-	private int value;
+	protected int value;
 
 	public Item(String name, String description, int weight, int usetime, int value) {
 
@@ -49,7 +49,8 @@ public abstract class Item implements Targetable, Serializable {
 	}
 	public String activate(Living source) {
 		if (!source.hasItem(this)) {
-			return "You do not have this item!";
+			source.sendMessage("You do not have this item!");
+			return "Do not have this item";
 		} else {
 			return use(source);
 
@@ -71,6 +72,13 @@ public abstract class Item implements Targetable, Serializable {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public String useItem(Living source, Weapon tool) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String useItem(Item tool){
+		return null;
+	}
 
 	/**
 	 * When someone types "use" with an item in their inventory. Ex: use
@@ -81,5 +89,6 @@ public abstract class Item implements Targetable, Serializable {
 	 * @return A public string about what happened.
 	 */
 	public abstract String use(Living source);
+
 
 }

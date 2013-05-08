@@ -15,7 +15,7 @@ public abstract class Living implements Targetable, Serializable{
 	protected int base_hp;
 	protected int hp;
 	protected int base_atk;
-	private int money;
+	protected int money;
 
 
 	private Room room;
@@ -65,6 +65,13 @@ public abstract class Living implements Targetable, Serializable{
 	public void removeItem(Item item){
 		items.remove(item);
 	}
+	public Item getItem(String itemName){
+		for(Item item : items){
+			if(item.getName().toLowerCase().equals(itemName.toLowerCase()))
+				return item;
+		}
+		return null;
+	}
 	public boolean hasItem(Item item){
 		return items.contains(item);
 	}
@@ -77,6 +84,10 @@ public abstract class Living implements Targetable, Serializable{
 	public int getMaxhp(){
 		return base_hp;
 	}
+	public int getHp(){
+		return hp;
+	}
+
 	public int getAtkdmg(){
 		return base_atk;
 	}

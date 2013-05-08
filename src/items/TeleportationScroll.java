@@ -9,6 +9,7 @@ public class TeleportationScroll extends Item{
 		description = "Teleportation Scroll can teleport a player to a random room";
 		weight = 5;
 		usetime = 1;
+		value = 150;
 	}
 
 	// teleport to a random room

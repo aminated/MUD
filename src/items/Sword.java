@@ -16,6 +16,7 @@ public class Sword extends Weapon {
 		weight = 20;
 		atk = 15;
 		usetime = 30;
+		value = 200;
 	}
 
 

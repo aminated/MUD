@@ -11,6 +11,7 @@ public class Grenade extends Weapon {
 		weight = 5;
 		usetime = 1;
 		atk = 45;
+		value = 100;
 	}
 
 

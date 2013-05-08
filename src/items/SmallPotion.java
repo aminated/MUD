@@ -12,6 +12,7 @@ public class SmallPotion extends Item {
 		description = "A small potion can heal the player's 25HP who is injured.";
 		weight = 2;
 		usetime =1;
+		value = 50;
 	}
 
 
@@ -19,7 +20,8 @@ public class SmallPotion extends Item {
 	public String use(Living source) {
 			source.heal(25);
 			source.removeItem(this);
-			return "You recover 25HP!";
+			source.sendMessage("You recover 25HP!") ;
+			return "";
 	}
 	
 }

@@ -10,12 +10,14 @@ public class Wood extends Item {
 		description = "Wood can only be used with hammer to block windows and door exits of buildings.";
 		weight = 1;
 		usetime = 1;
+		value = 30;
 	}
 
 	@Override
 	public String use(Living source) {
 		// TODO Auto-generated method stub
-		return "Wood can only be used with hammer!";
+		source.sendMessage("Wood can only be used with hammer!") ;
+		return "";
 	}
 
 	

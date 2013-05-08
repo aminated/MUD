@@ -14,6 +14,7 @@ public class Rifle extends Weapon {
 		weight = 35;
 		atk =50;
 		usetime = 10;
+		value = 1000;
 		// TODO Auto-generated constructor stub
 	}
 

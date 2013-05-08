@@ -12,6 +12,7 @@ public class FullHealthPotion extends Item {
 		description = "A  FullHealth Potion can heal the player's full health who is injured.";
 		weight = 5;
 		usetime = 1;
+		value = 200;
 	}
 
 	@Override
@@ -19,7 +20,8 @@ public class FullHealthPotion extends Item {
 		int heal = source.getMaxhp();
 			source.heal(heal);
 			source.removeItem(this);
-			return "You HP is full!";		
+			source.sendMessage("You HP is full!") ;
+			return "";
 		}
 		
 	}
