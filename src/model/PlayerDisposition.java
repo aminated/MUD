@@ -24,7 +24,8 @@ public class PlayerDisposition extends Disposition{
 		public ObjectOutputStream ostream;
 		public void run(){
 			while(true){
-
+				try{
+				puts(">");
 				String command = "";
 				try {
 					command = (String) istream.readObject();
@@ -32,7 +33,7 @@ public class PlayerDisposition extends Disposition{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IOException e) {
-					// TODO Handle dropped connection.
+					owner.getRoom().remove(owner);
 					e.printStackTrace();
 				}
 				CommandParser parser = null;
@@ -45,6 +46,10 @@ public class PlayerDisposition extends Disposition{
 				}
 				else{
 					parser.invoke();
+				}
+				}
+				catch(Throwable e){
+					puts(e.getMessage());
 				}
 				/*
 				if(command.equals("look"))
