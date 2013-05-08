@@ -46,7 +46,9 @@ public class Player extends Living{
 		this.addItem(tool);
 		return ""; // Give actions aren't publicly visible. 
 	}
-	
+	public void setPassword(String newPassword){
+		this.password = newPassword;
+	}
 	public String getPassword(){
 		return password;
 	}
