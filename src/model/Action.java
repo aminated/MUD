@@ -14,8 +14,8 @@ public class Action {
 	private Living source;
 	private Targetable target;
 	private Item tool;
-	private boolean completed = false;
-	private String result; 
+	protected boolean completed = false;
+	protected String result; 
 	
 	/**
 	 * Parse a command and create an action. 
@@ -85,7 +85,7 @@ public class Action {
 		if(completed)
 			return result;
 		else
-			return "Action not yet executed";
+			return "";
 	}
 	public void execute(){
 		

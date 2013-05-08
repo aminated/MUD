@@ -43,7 +43,7 @@ public class Room implements Serializable{
 			if(thing.getName().equals(name))
 				return thing;
 		}
-		return null;
+		throw new InvalidNameException(name);
 	}
 	/**
 	 * Notifies everyone in the room of something. 

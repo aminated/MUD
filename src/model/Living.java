@@ -15,7 +15,25 @@ public abstract class Living implements Targetable, Serializable{
 	protected int base_hp;
 	protected int hp;
 	protected int base_atk;
+	protected Item equipped = null;
 	protected int money;
+	private GiveAction getting = null;
+	private GiveAction giving = null;
+	public GiveAction getGetAction() {
+		return getting;
+	}
+
+	public void setGetAction(GiveAction getting) {
+		this.getting = getting;
+	}
+
+	public GiveAction getGiveAction() {
+		return giving;
+	}
+
+	public void setGiveAction(GiveAction giving) {
+		this.giving = giving;
+	}
 
 
 	private Room room;
@@ -70,7 +88,7 @@ public abstract class Living implements Targetable, Serializable{
 			if(item.getName().toLowerCase().equals(itemName.toLowerCase()))
 				return item;
 		}
-		return null;
+		throw new InvalidNameException(itemName);
 	}
 	public boolean hasItem(Item item){
 		return items.contains(item);
@@ -81,13 +99,12 @@ public abstract class Living implements Targetable, Serializable{
 	public String getName(){
 		return name;
 	}
-	public int getMaxhp(){
-		return base_hp;
-	}
 	public int getHp(){
 		return hp;
 	}
-
+	public int getMaxhp(){
+		return base_hp;
+	}
 	public int getAtkdmg(){
 		return base_atk;
 	}

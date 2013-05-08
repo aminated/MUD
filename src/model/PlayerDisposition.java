@@ -14,6 +14,10 @@ import java.util.regex.Pattern;
 import disposition.Disposition;
 
 public class PlayerDisposition extends Disposition{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5327640191565083269L;
 	private ClientConnection listener;
 	private class ClientConnection extends Thread{
 		public ObjectInputStream istream;
@@ -69,7 +73,7 @@ public class PlayerDisposition extends Disposition{
 		 * @return
 		 */
 		private String[] split(String command){ 
-			Pattern p = Pattern.compile("\\s+((on|go|at|to)\\s+)?", Pattern.CASE_INSENSITIVE);
+			Pattern p = Pattern.compile("\\s+((on|go|at|to|from)\\s+)?", Pattern.CASE_INSENSITIVE);
 			String[] args = p.split(command);
 			if(args[0].equals("")) args = Arrays.copyOfRange(args, 1, args.length);
 			return args;
@@ -161,8 +165,8 @@ public class PlayerDisposition extends Disposition{
 			public void invoke(){
 				String targetName = args[1];
 				Targetable target = owner.getRoom().getByName(targetName);
-				if(target == null || !(target instanceof Living)){
-					listener.puts("Error: no one named " + targetName + " in room.");
+				if(!(target instanceof Living)){
+					listener.puts(target.getName() + " isn't alive! \n");
 					return;
 				}
 				Living receiver = (Living) target;
@@ -174,7 +178,54 @@ public class PlayerDisposition extends Disposition{
 		
 		CommandParser cmdDrop = new CommandParser(){
 			public String regex = "drop";
-		}
+			public void invoke(){
+				String itemName = args[1];
+				Item item = owner.getItem(itemName);
+				owner.getRoom().add(item);
+				owner.removeItem(item);
+				owner.getRoom().announce(owner.getName()+" drops "+ item.getName()+".\n");
+			}
+		};
+		commands.add(cmdDrop);
+		
+		CommandParser cmdGive = new CommandParser(){
+			public String regex = "give";
+			public void invoke(){
+				String targetName = args[2];
+				String itemName = args[1];
+				Targetable target = owner.getRoom().getByName(targetName);
+				Item item = owner.getItem(itemName);
+				if(!(target instanceof Living)){
+					listener.puts(target.getName() + " isn't alive! \n");
+					return;
+				}
+				Living receiver = (Living) target;
+				GiveAction action = new GiveAction(owner, receiver, item);
+				owner.setGiveAction(action);
+				addAction(action);
+			}
+		};
+		commands.add(cmdGive);
+		
+		CommandParser cmdGet = new CommandParser(){
+			public String regex = "get";
+			public void invoke(){
+				String sourceName = args[2];
+				String itemName = args[1];
+				Targetable source = owner.getRoom().getByName(sourceName);
+				Item item = owner.getItem(itemName);
+				if(!(source instanceof Living)){
+					listener.puts(source.getName() + " isn't alive! \n");
+					return;
+				}
+				Living giver = (Living) source;
+				GiveAction action = new GiveAction(giver, owner, item);
+				owner.setGiveAction(action);
+				addAction(action);
+			}
+		};
+		commands.add(cmdGet);
+		
 	}
 	public PlayerDisposition(Socket client, Player player){
 		super(player);
@@ -192,6 +243,7 @@ public class PlayerDisposition extends Disposition{
 	}
 	@Override
 	public void notify(Action event) {
+		
 		listener.puts(event.describe() + "\n");
 	}
 	@Override

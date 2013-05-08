@@ -1,15 +1,7 @@
 package model;
 
-import items.Hammer;
 import items.Item;
-
-import items.FullHealthPotion;
-import items.LargePotion;
-import items.Sledgehammer;
-import items.SmallPotion;
-import items.StaminaTablet;
 import items.Weapon;
-import items.Wood;
 
 
 import disposition.Healer;
@@ -21,6 +13,33 @@ import disposition.Hostile;
 public class Player extends Living{
 
 	private String password;
+	private GiveAction receiving = null;
+	private GiveAction giving = null;
+	public GiveAction getReceiving() {
+		return receiving;
+	}
+
+	public void setReceiving(GiveAction receiving) {
+		this.receiving = receiving;
+	}
+
+	public GiveAction getGiving() {
+		return giving;
+	}
+
+	public void setGiving(GiveAction giving) {
+		this.giving = giving;
+	}
+
+	private boolean admin = false;
+	
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 
 	public Player(String name, String password, int base_hp, int base_atk, int money) {
 		super(name, base_hp, base_atk, money);
@@ -50,55 +69,23 @@ public class Player extends Living{
 
 	@Override
 	public String useItem(Living source, Item tool) {
+		
 		source.sendMessage("You give " + tool.getName() + " to " + getName());
 		source.removeItem(tool);
 		this.addItem(tool);
 		return ""; // Give actions aren't publicly visible. 
 	}
-	public void setPassword(String newPassword){
-		this.password = newPassword;
-	}
-	public String getPassword(){
-		return password;
-	}
 	
-	
-//merge hammer and wood 
-	public String useItem(Item tool1, Item tool2){
-		if (tool1 instanceof Hammer && this.hasItem(tool1)){
-			if(tool2 instanceof Wood && this.hasItem(tool2)){
-			this.removeItem(tool1);
-			this.removeItem(tool2);
-			this.addItem(new Sledgehammer());
-			return "Success to merge!";
-			}
-		}
-
-
-		return "Fail to merge!";
-	}
-
-	@Override
 	public String useItem(Item tool) {
 		if(tool instanceof SmallPotion && this.hasItem(tool)){
 			tool.use(this);
 			return "";
-		}
-		if(tool instanceof LargePotion && this.hasItem(tool)){
-			tool.use(this);
-			return "";
-		}
-		if(tool instanceof StaminaTablet && this.hasItem(tool)){
-			tool.use(this);
-			return "";
-		}
-		if(tool instanceof FullHealthPotion && this.hasItem(tool)){
-			tool.use(this);
-			return "";
-		}
 		
-		return null;
-	}
+		}
+	public String getPassword(){
+			return "";
+		}
+
 
 	
 }
