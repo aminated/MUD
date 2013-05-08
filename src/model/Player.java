@@ -69,12 +69,8 @@ public class Player extends Living{
 
 
 	
-	public String useItem(Item tool) {
-		if(tool instanceof SmallPotion && this.hasItem(tool)){
-			tool.use(this);
-			return "";
-		
-		}
+    // UseItem(Living, Item) means someone else used the item on the player.
+	// if the player uses an item, that's item.use(player). s
 	public String getPassword(){
 			return "";
 		}

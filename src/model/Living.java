@@ -155,4 +155,12 @@ public abstract class Living implements Targetable, Serializable{
 		return source.getName() + " kills " + getName();
 
 	}
+
+	public String useItem(Item tool) {
+		return tool.use(this);
+	}
+	
+	public String useItem(Item tool, Item tool2){
+		return tool.useItem(this, tool2);
+	}
 }
