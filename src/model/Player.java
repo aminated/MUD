@@ -12,7 +12,7 @@ import disposition.Hostile;
 public class Player extends Living{
 
 	private String password;
-
+	public boolean admin = false;
 	public Player(String name, String password, int base_hp, int base_atk, int money) {
 		super(name, base_hp, base_atk, money);
 		this.password = password;
