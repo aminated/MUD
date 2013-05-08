@@ -27,13 +27,18 @@ public class LockDoor extends Door {
 	}
 	public String useItem(Living source, Item tool){
 		if(tool instanceof DoorKey){
+			DoorKey key = (DoorKey) tool;
+			if(key.getLabel().equals(label)){
 			locked = (!locked);
 			String word = locked ? " locked " : " unlocked ";
 			return source.getName() + word + getName();
+			}
+			else
+				source.sendMessage("Wrong key.");
 		}
 		else{
-			source.sendMessage("Only keys can be used on doors");
-			return "";
+			source.sendMessage("Only keys can be used on doors.");
 		}
+		return "";
 	}
 }

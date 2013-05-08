@@ -3,14 +3,13 @@ package items;
 import model.Living;
 
 public class DoorKey extends Item {
-
-	public DoorKey(String name, String description, int weight, int usetime,
-			int value) {
-		super(name, description, weight, usetime, value);
-		// TODO Auto-generated constructor stub
+	private String label;
+	public String getLabel(){
+		return label;
 	}
-
+// Example: DoorKey("red").getDescription = "A red key". Opens LockDoor("red").
 	public DoorKey(String label) {
+		this.label = label;
 		name = label + "-key";
 		description = "A " + label + "key.";
 		weight = 1;
@@ -20,8 +19,8 @@ public class DoorKey extends Item {
 
 	@Override
 	public String use(Living source) {
-		// TODO Auto-generated method stub
-		return null;
+		source.sendMessage("Keys can only be used on doors");
+		return "";
 	}
 
 }

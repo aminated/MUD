@@ -2,7 +2,6 @@ package items;
 
 import model.Living;
 import model.Mob;
-import model.Monster;
 import model.Targetable;
 
 /**

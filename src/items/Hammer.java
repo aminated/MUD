@@ -9,7 +9,6 @@ import model.Targetable;
  */
 public class Hammer extends Weapon {
 
-	private Sledgehammer Sledgehammer;
 	public Hammer(){
 		
 		name = "Hammer";
