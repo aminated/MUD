@@ -128,11 +128,11 @@ public abstract class Living implements Targetable, Serializable{
 	public String useItem(Living source, Item tool){
 		if(tool instanceof Weapon){
 			Weapon weapon = (Weapon) tool;
-			int damage = weapon.getAtkdmg() * source.getAtkdmg();
-			hp -= damage;
+			int damage=source.getAtkdmg()+(int) Math.round(weapon.getAtkdmg()*0.4);
+			 hp -= damage;
 			String message = source.getName() + " attacks " + this.getName() + " with " + tool.getName()
 					+ " for " + damage + " damage.\n";
-			if(hp < 0)
+			if(hp <= 0)
 				message += die(source) + "\n";
 			return message;
 			 
@@ -156,11 +156,9 @@ public abstract class Living implements Targetable, Serializable{
 
 	}
 
-	public String useItem(Item tool) {
-		return tool.use(this);
-	}
+	//public String useItem(Item tool) {
 	
-	public String useItem(Item tool, Item tool2){
-		return tool.useItem(this, tool2);
-	}
+	
+	//public String useItem(Item tool, Item tool2){
+	
 }

@@ -44,7 +44,7 @@ public class ItemTest {
 		assertEquals(30, a.getUsetime());
 		Living source = new Mob("Mob", 50, 5, 100);
 		Living source1 = new Player("Wang", "a", 50, 10, 0);
-		assertEquals("Do not have this item", a.activate(source));
+		assertEquals("", a.activate(source));
 		source1.addItem(a);
 		assertEquals("Wang attacks Mob by Bat", source.useItem(source1, a));
 
@@ -142,14 +142,14 @@ public class ItemTest {
 		source1.activate(source);
 
 		assertEquals(110, source1.getHp());
-		source1.useItem(small);
+		small.use(source1);
 		assertEquals(135, source1.getHp());
-		source1.useItem(large);
+		large.use(source1);
 		assertEquals(185, source1.getHp());
-		source1.useItem(stamina);
+		stamina.use(source1);
 		assertEquals(210, source1.getHp());
 		assertEquals(225, source1.getMaxhp());
-		source1.useItem(full);
+		full.use(source1);
 		assertEquals(225, source1.getHp());
 
 	}
@@ -180,17 +180,17 @@ public class ItemTest {
 	}
 
 	@Test
-	public void testGiveItem() {
+	public void testFight() {
 		Item a = new Bat();
 		Item b = new Rifle();
-		Living c1w = new Player("c1w", "", 1, 0, 0);
-		Living fd = new Player("Otacon", "", 100, 100, 0);
+		Living c1w = new Player("c1w", "", 100, 10, 0);
+		Living fd = new Player("Otacon", "", 100, 10, 0);
 		c1w.addItem(a);
-		fd.addItem(b);
-		fd.useItem(c1w, a);
+		fd.addItem(b);	
 		c1w.useItem(fd, b);
-		assertTrue(c1w.hasItem(b));
-		assertTrue(fd.hasItem(a));
+		assertEquals(70,c1w.getHp());
+		fd.useItem(c1w,a);
+		assertEquals(86,fd.getHp());
 
 	}
 	
@@ -199,7 +199,7 @@ public class ItemTest {
 		Item a = new Hammer();
 		Item b = new Wood();
 		Living fd = new Player("Otacon", "", 100, 100, 0);
-		assertEquals("Fail to merge!",fd.useItem(a,b));
+		assertEquals("Fail to merge!",a.useItem(fd,b));
 		fd.addItem(a);
 		assertEquals("Fail to merge!",fd.useItem(a,b));
 		fd.addItem(b);

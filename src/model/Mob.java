@@ -52,11 +52,6 @@ public class Mob extends Living{
 	}
 
 
-	@Override
-	public String useItem(Item tool) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 

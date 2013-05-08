@@ -15,7 +15,8 @@ public abstract class Item implements Targetable, Serializable {
 	protected int usetime;
 	protected int value;
 
-	public Item(String name, String description, int weight, int usetime, int value) {
+	public Item(String name, String description, int weight, int usetime,
+			int value) {
 
 		this.name = name;
 		this.description = description;
@@ -47,6 +48,7 @@ public abstract class Item implements Targetable, Serializable {
 	public int getValue() {
 		return value;
 	}
+
 	public String activate(Living source) {
 		if (!source.hasItem(this)) {
 			source.sendMessage("You do not have this item!");
@@ -73,13 +75,12 @@ public abstract class Item implements Targetable, Serializable {
 		return null;
 	}
 
-	public String useItem(Item tool){
-		return null;
-	}
+	//public String useItem(Item tool) {
+	
 
-	public String useItem(Item tool1, Item tool2){
-		return null;
-	}
+	//public String useItem(Item tool1, Item tool2) {
+		
+
 	/**
 	 * When someone types "use" with an item in their inventory. Ex: use
 	 * Health-potion
@@ -89,6 +90,7 @@ public abstract class Item implements Targetable, Serializable {
 	 * @return A public string about what happened.
 	 */
 	public abstract String use(Living source);
+
 
 
 }
