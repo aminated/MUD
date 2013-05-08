@@ -16,7 +16,9 @@ public class StaminaTablet extends Item {
 	public String use(Living source) {
 		source.increaseMaxHP(25);
 		source.removeItem(this);
-		return "Your MaxHP has increased 25!";
+		source.sendMessage("Your MaxHP has increased 25!") ;
+		return "";
+		
 	}
 
 }

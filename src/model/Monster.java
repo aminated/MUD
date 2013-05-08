@@ -4,8 +4,8 @@ import items.Item;
 
 public class Monster extends Living {
 
-	public Monster(String name, int base_hp, int base_atk) {
-		super(name, base_hp, base_atk);
+	public Monster(String name, int base_hp, int base_atk,int money) {
+		super(name, base_hp, base_atk, money);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -28,17 +28,22 @@ public class Monster extends Living {
 
 	@Override
 	public String useItem(Living source, Item tool) {
-		
-			source.sendMessage("You attack the monster with " + tool.getName());
-			hp--;
-			if (hp == 0) {
-				this.getRoom().remove(this);
-				return getName() + " dies.";
-			}
-			return source.getName() + " attacks " + getName() + " with "
-					+ tool.getName(); // TODO Auto-generated method stub
 
-		
+		source.sendMessage("You attack the monster with " + tool.getName());
+		hp--;
+		if (hp == 0) {
+			this.getRoom().remove(this);
+			return getName() + " dies.";
+		}
+		return source.getName() + " attacks " + getName() + " with "
+				+ tool.getName(); // TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public String useItem(Item tool) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

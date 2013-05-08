@@ -19,7 +19,8 @@ public class LargePotion extends Item {
 	public String use(Living source) {
 			source.heal(50);
 			source.removeItem(this);
-			return "You recover 50HP!";		
+			source.sendMessage("You recover 50HP!") ;
+			return "";
 		}
 		
 	}

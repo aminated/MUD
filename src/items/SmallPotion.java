@@ -20,7 +20,8 @@ public class SmallPotion extends Item {
 	public String use(Living source) {
 			source.heal(25);
 			source.removeItem(this);
-			return "You recover 25HP!";
+			source.sendMessage("You recover 25HP!") ;
+			return "";
 	}
 	
 }

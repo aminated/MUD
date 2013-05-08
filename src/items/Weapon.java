@@ -1,6 +1,8 @@
 package items;
 
 import model.Living;
+import model.Mob;
+import model.Monster;
 import model.Targetable;
 
 /**
@@ -20,21 +22,23 @@ public abstract class Weapon extends Item {
 	protected int atk;
 
 	public String use(Living source) {
-		return "Weapons need a target to use!";
+		source.sendMessage("Weapons need a target to use!") ;
+		return "";
 	}
 
 	public int getAtkdmg() {
 		return atk;
 	}
 
-	public String use(Living source, Targetable target) {
+	public String use(Living source, Mob target) {
 		if (source.hasItem(this)) {
-			target.useItem(source, this);
 			usetime--;
 			if (usetime == 0)
 				source.removeItem(this);
-			return "You use " + this.getName() + "!";
+			source.sendMessage("You use " + this.getName() + "!") ;
+			return "";
 		} else
-			return "You do not have this item!";
+			source.sendMessage("You do not have this item!");
+			return "";
 	}
 }

@@ -1,6 +1,7 @@
 package model;
 
 import items.Item;
+import items.Weapon;
 
 
 import disposition.Healer;
@@ -47,8 +48,15 @@ public class Player extends Living{
 		return ""; // Give actions aren't publicly visible. 
 	}
 	
+	public String useItem(Item tool){
+		tool.use(this);
+		return "";
+		
+	}
 	public String getPassword(){
 		return password;
 	}
 
+
+	
 }

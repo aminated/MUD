@@ -1,5 +1,6 @@
 package model;
 import items.Item;
+import items.Weapon;
 /**
  * Something that exists in a room but may not be picked up. e.g. door, chest, button, living creatures. 
  * 
@@ -34,4 +35,6 @@ public interface Targetable{
 	 */
 	public String useItem(Living source, Item tool);
 	
+	public String useItem(Item tool);
+
 }

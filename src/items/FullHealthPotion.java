@@ -20,7 +20,8 @@ public class FullHealthPotion extends Item {
 		int heal = source.getMaxhp();
 			source.heal(heal);
 			source.removeItem(this);
-			return "You HP is full!";		
+			source.sendMessage("You HP is full!") ;
+			return "";
 		}
 		
 	}

@@ -21,8 +21,8 @@ public class WalkieTalkie extends Item {
 	@Override
 	public String use(Living source) {
 		// TODO Auto-generated method stub
-
-		return "Connecting to chat.";
+		source.sendMessage("Connecting to chat.");
+		return "";
 	}
 
 }

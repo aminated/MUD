@@ -39,14 +39,24 @@ public class Mob extends Living{
 		}
 	}
 	public String attack(Living source, Weapon tool){
-		source.sendMessage("You attack " + getName() + "by " + tool.getName());
-		this.hp-=tool.getAtkdmg();
-		return source.getName() + " attack " + getName();
+		tool.use(source, this);
+		source.sendMessage("You attack " + getName() + " by " + tool.getName());
+		this.hp=hp-source.getAtkdmg()-(int) Math.round(tool.getAtkdmg()*0.4);
+		return source.getName() + " attacks " + getName() +" by "+ tool.getName();
 	}
 	
 	public String attack(Living source){
 		source.sendMessage("You attack " + getName());
 		this.hp-=source.getAtkdmg();
-		return source.getName() + " attack " + getName();
+		return source.getName() + " attacks " + getName();
 	}
+
+
+	@Override
+	public String useItem(Item tool) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

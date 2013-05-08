@@ -23,7 +23,8 @@ public class Hammer extends Weapon {
 		source.removeItem(this);
 		source.removeItem(Wood);
 		source.addItem(Sledgehammer);
-		return "You forged items successfully!";
+		source.sendMessage("You forged items successfully!"); 
+		return "";
 	}
 
 	

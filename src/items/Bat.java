@@ -20,6 +20,5 @@ public class Bat extends Weapon {
 	}
 
 	
-	
 
 }
