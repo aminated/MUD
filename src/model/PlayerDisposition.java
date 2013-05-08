@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
-
+import controller.Stream;
 import disposition.Disposition;
 
 public class PlayerDisposition extends Disposition{
@@ -24,6 +24,12 @@ public class PlayerDisposition extends Disposition{
 		public ObjectOutputStream ostream;
 		public void run(){
 			while(true){
+				try {
+					ostream.writeObject(">");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				String command = "";
 				try {
 					command = (String) istream.readObject();
@@ -72,6 +78,9 @@ public class PlayerDisposition extends Disposition{
 		 * @param command
 		 * @return
 		 */
+		public CommandParser(String regex){
+			this.regex = regex;
+		}
 		private String[] split(String command){ 
 			Pattern p = Pattern.compile("\\s+((on|go|at|to|from)\\s+)?", Pattern.CASE_INSENSITIVE);
 			String[] args = p.split(command);
@@ -107,8 +116,7 @@ public class PlayerDisposition extends Disposition{
 		public abstract void invoke();
 	}
 	private void addCommands(){
-		CommandParser cmdInventory = new CommandParser(){
-			public String regex = "inventory";
+		CommandParser cmdInventory = new CommandParser("inventory"){
 			public void invoke(){
 				String output = "Inventory: \n";
 				for(Item i: owner.getItems()) 
@@ -117,8 +125,7 @@ public class PlayerDisposition extends Disposition{
 			}
 		};
 		commands.add(cmdInventory);
-		CommandParser cmdMove = new CommandParser(){
-			public String regex = "(north|south|east|west)";
+		CommandParser cmdMove = new CommandParser("(north|south|east|west)"){
 			private String capitalize(String string){
 				char[] charArray = string.toCharArray();
 				charArray[0] = Character.toUpperCase(charArray[0]);
@@ -131,8 +138,7 @@ public class PlayerDisposition extends Disposition{
 			}
 		};
 		commands.add(cmdMove);
-		CommandParser cmdLook = new CommandParser(){
-			public String regex = "look";
+		CommandParser cmdLook = new CommandParser("look"){
 			public void invoke(){
 				if(args.length == 1)
 					listener.puts(owner.getRoom().describe());
@@ -140,8 +146,7 @@ public class PlayerDisposition extends Disposition{
 			}
 		};
 		commands.add(cmdLook);
-		CommandParser cmdUse = new CommandParser(){
-			public String regex = "use";
+		CommandParser cmdUse = new CommandParser("use"){
 			public void invoke(){
 				// Pass off to Action
 				// TODO: Handle different types of "use" so we don't parse things twice. 
@@ -151,8 +156,7 @@ public class PlayerDisposition extends Disposition{
 		};
 		commands.add(cmdUse);
 		
-		CommandParser cmdSay = new CommandParser(){
-			public String regex = "say";
+		CommandParser cmdSay = new CommandParser("say"){
 			public void invoke(){
 				String message = command.substring(4);
 				owner.getRoom().announce(owner.getName() + " says: " + message);
@@ -160,8 +164,7 @@ public class PlayerDisposition extends Disposition{
 		};
 		commands.add(cmdSay);
 		
-		CommandParser cmdTell = new CommandParser(){
-			public String regex = "tell";
+		CommandParser cmdTell = new CommandParser("tell"){
 			public void invoke(){
 				String targetName = args[1];
 				Targetable target = owner.getRoom().getByName(targetName);
@@ -176,8 +179,7 @@ public class PlayerDisposition extends Disposition{
 		};
 		commands.add(cmdTell);
 		
-		CommandParser cmdDrop = new CommandParser(){
-			public String regex = "drop";
+		CommandParser cmdDrop = new CommandParser("drop"){
 			public void invoke(){
 				String itemName = args[1];
 				Item item = owner.getItem(itemName);
@@ -188,8 +190,7 @@ public class PlayerDisposition extends Disposition{
 		};
 		commands.add(cmdDrop);
 		
-		CommandParser cmdGive = new CommandParser(){
-			public String regex = "give";
+		CommandParser cmdGive = new CommandParser("give"){
 			public void invoke(){
 				String targetName = args[2];
 				String itemName = args[1];
@@ -207,8 +208,7 @@ public class PlayerDisposition extends Disposition{
 		};
 		commands.add(cmdGive);
 		
-		CommandParser cmdGet = new CommandParser(){
-			public String regex = "get";
+		CommandParser cmdGet = new CommandParser("get"){
 			public void invoke(){
 				String sourceName = args[2];
 				String itemName = args[1];
@@ -227,18 +227,13 @@ public class PlayerDisposition extends Disposition{
 		commands.add(cmdGet);
 		
 	}
-	public PlayerDisposition(Socket client, Player player){
+	public PlayerDisposition(Stream client, Player player){
 		super(player);
 		
 		addCommands();
 		this.listener = new ClientConnection();
-		try {
-			listener.istream = new ObjectInputStream( client.getInputStream() );
-			listener.ostream = new ObjectOutputStream( client.getOutputStream() );
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		listener.istream =  client.in ;
+		listener.ostream =  client.out ;
 		listener.start();
 	}
 	@Override

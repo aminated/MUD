@@ -13,8 +13,17 @@ public class RunServer {
 		Server server = new Server();
 		
 		server.start();
+	//	server.initializeRoomDatabase();
+	//	server.initializePlayerDatabase();
+		try{
 		server.loadRoomDB();
 		server.loadPlayerDB();
+		}
+		catch(Error e){
+			System.out.println(e.getMessage() + "\n Creating new DB.");
+			server.initializePlayerDatabase();
+			server.initializeRoomDatabase();
+		}
 		server.runDemo();
 	}
 }

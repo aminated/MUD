@@ -67,7 +67,7 @@ public class Server extends Thread {
 	/**
 	 * Creates a new Player, adds it to a Room, and adds it to the playerDB.
 	 */
-	public void createPlayer(String name, String password, Socket client) {
+	public void createPlayer(String name, String password, Stream client) {
 		Player player = new Player(name, password, 1, 1, 1);
 		PlayerDisposition disposition = new PlayerDisposition(client, player);
 		player.setDisposition(disposition);
@@ -79,6 +79,7 @@ public class Server extends Thread {
 	private class Login extends Thread {
 		private ObjectInputStream istream;
 		private ObjectOutputStream ostream;
+		private Stream stream;
 		private String response;
 		boolean loginFlag = false;
 		private Socket client;
@@ -88,6 +89,7 @@ public class Server extends Thread {
 			try {
 				istream = new ObjectInputStream(client.getInputStream());
 				ostream = new ObjectOutputStream(client.getOutputStream());
+				stream = new Stream(ostream, istream);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -147,11 +149,11 @@ public class Server extends Thread {
 			
 				if (response!=null)
 				if (response.equals("Login")) {
-					if (loadPlayer(name, password, client))
+					if (loadPlayer(name, password, stream))
 						loginFlag = true;
 				} else if (response.equals("New")) {
 					System.out.println("New");
-					createPlayer(name, password, client);
+					createPlayer(name, password, stream);
 					loginFlag = true;
 				}
 			}
@@ -173,7 +175,7 @@ public class Server extends Thread {
 	 * @param name
 	 *            , password: A user's name and password
 	 */
-	public Boolean loadPlayer(String name, String password, Socket client) {
+	public Boolean loadPlayer(String name, String password, Stream client) {
 		for (Player player : playerDB) {
 			// Check playerDB for given name and password
 			if (player.getName().equals(name)
