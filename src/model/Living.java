@@ -107,6 +107,9 @@ public abstract class Living implements Targetable, Serializable{
 	public void addMoney(int value){
 		money+=value;
 	}
+	public void setName(String newName){
+		this.name = newName;
+	}
 	/*
 	 * Source kills this Object and loot all things
 	 */

@@ -2,7 +2,12 @@ package model;
 
 import items.Hammer;
 import items.Item;
+
+import items.FullHealthPotion;
+import items.LargePotion;
 import items.Sledgehammer;
+import items.SmallPotion;
+import items.StaminaTablet;
 import items.Weapon;
 import items.Wood;
 
@@ -16,7 +21,7 @@ import disposition.Hostile;
 public class Player extends Living{
 
 	private String password;
-	public boolean admin = false;
+
 	public Player(String name, String password, int base_hp, int base_atk, int money) {
 		super(name, base_hp, base_atk, money);
 		this.password = password;
@@ -50,11 +55,8 @@ public class Player extends Living{
 		this.addItem(tool);
 		return ""; // Give actions aren't publicly visible. 
 	}
-	
-	public String useItem(Item tool){
-		tool.use(this);
-		return "";
-		
+	public void setPassword(String newPassword){
+		this.password = newPassword;
 	}
 	public String getPassword(){
 		return password;
@@ -72,7 +74,30 @@ public class Player extends Living{
 			}
 		}
 
+
 		return "Fail to merge!";
+	}
+
+	@Override
+	public String useItem(Item tool) {
+		if(tool instanceof SmallPotion && this.hasItem(tool)){
+			tool.use(this);
+			return "";
+		}
+		if(tool instanceof LargePotion && this.hasItem(tool)){
+			tool.use(this);
+			return "";
+		}
+		if(tool instanceof StaminaTablet && this.hasItem(tool)){
+			tool.use(this);
+			return "";
+		}
+		if(tool instanceof FullHealthPotion && this.hasItem(tool)){
+			tool.use(this);
+			return "";
+		}
+		
+		return null;
 	}
 
 	
