@@ -19,13 +19,8 @@ public class Hammer extends Weapon {
 		usetime = 30;
 		value = 50;
 	}
-	public String useItem(Living source, Wood Wood) {
-		source.removeItem(this);
-		source.removeItem(Wood);
-		source.addItem(Sledgehammer);
-		source.sendMessage("You forged items successfully!"); 
-		return "";
+	
 	}
 
 	
-}
+

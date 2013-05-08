@@ -46,4 +46,10 @@ public class Monster extends Living {
 		return null;
 	}
 
+	@Override
+	public String useItem(Item tool1, Item tool2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -72,14 +72,14 @@ public abstract class Item implements Targetable, Serializable {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public String useItem(Living source, Weapon tool) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	public String useItem(Item tool){
 		return null;
 	}
 
+	public String useItem(Item tool1, Item tool2){
+		return null;
+	}
 	/**
 	 * When someone types "use" with an item in their inventory. Ex: use
 	 * Health-potion

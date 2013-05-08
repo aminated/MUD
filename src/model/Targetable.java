@@ -36,5 +36,7 @@ public interface Targetable{
 	public String useItem(Living source, Item tool);
 	
 	public String useItem(Item tool);
+	
+	public String useItem(Item tool1, Item tool2);
 
 }

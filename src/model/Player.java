@@ -1,7 +1,10 @@
 package model;
 
+import items.Hammer;
 import items.Item;
+import items.Sledgehammer;
 import items.Weapon;
+import items.Wood;
 
 
 import disposition.Healer;
@@ -56,7 +59,21 @@ public class Player extends Living{
 	public String getPassword(){
 		return password;
 	}
+	
+	
+//merge hammer and wood 
+	public String useItem(Item tool1, Item tool2){
+		if (tool1 instanceof Hammer && this.hasItem(tool1)){
+			if(tool2 instanceof Wood && this.hasItem(tool2)){
+			this.removeItem(tool1);
+			this.removeItem(tool2);
+			this.addItem(new Sledgehammer());
+			return "Success to merge!";
+			}
+		}
 
+		return "Fail to merge!";
+	}
 
 	
 }

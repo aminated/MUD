@@ -7,16 +7,19 @@ import java.util.List;
 
 import items.Bat;
 import items.FullHealthPotion;
+import items.Grenade;
 import items.Hammer;
 import items.Handgun;
 import items.Item;
 import items.LargePotion;
 import items.Rifle;
 import items.Shotgun;
+import items.Sledgehammer;
 import items.SmallPotion;
 import items.StaminaTablet;
 import items.Sword;
 import items.Weapon;
+import items.Wood;
 
 import model.Living;
 import model.Mob;
@@ -105,7 +108,7 @@ public class ItemTest {
 		assertEquals("Sword", a.getName());
 		assertEquals(20, a.getWeight());
 		assertEquals(
-				"The Sword is the best melee Weapon in the game and has high chance to kill with one hit.",
+				"The Sword is the best melee Weapon in the game.",
 				a.getDescription());
 		assertEquals(15, a.getAtkdmg());
 		assertEquals(30, a.getUsetime());
@@ -149,6 +152,60 @@ public class ItemTest {
 		source1.useItem(full);
 		assertEquals(225, source1.getHp());
 
+	}
+
+	@Test
+	public void testGrenade() {
+		Weapon Grenade = new Grenade();
+		assertEquals("Grenade", Grenade.getName());
+		assertEquals(5, Grenade.getWeight());
+		assertEquals(
+				"Grenade is a disposable weapon which can cause huge damage.",
+				Grenade.getDescription());
+		assertEquals(45, Grenade.getAtkdmg());
+		assertEquals(1, Grenade.getUsetime());
+		assertEquals(100, Grenade.getValue());
+
+		Living source = new Mob("Mob", 100, 5, 100);
+		Living source1 = new Player("Wang", "a", 50, 10, 0);
+
+		source1.addItem(Grenade);
+		source.activate(source1);
+		assertEquals(90, source.getHp());
+		assertEquals("Wang attacks Mob by Grenade",
+				source.useItem(source1, Grenade));
+		assertEquals(62, source.getHp());
+		assertFalse(source1.hasItem(Grenade));
+
+	}
+
+	@Test
+	public void testGiveItem() {
+		Item a = new Bat();
+		Item b = new Rifle();
+		Living c1w = new Player("c1w", "", 1, 0, 0);
+		Living fd = new Player("Otacon", "", 100, 100, 0);
+		c1w.addItem(a);
+		fd.addItem(b);
+		fd.useItem(c1w, a);
+		c1w.useItem(fd, b);
+		assertTrue(c1w.hasItem(b));
+		assertTrue(fd.hasItem(a));
+
+	}
+	
+	@Test 
+	public void testMergeItem(){
+		Item a = new Hammer();
+		Item b = new Wood();
+		Living fd = new Player("Otacon", "", 100, 100, 0);
+		assertEquals("Fail to merge!",fd.useItem(a,b));
+		fd.addItem(a);
+		assertEquals("Fail to merge!",fd.useItem(a,b));
+		fd.addItem(b);
+		assertEquals("Success to merge!",fd.useItem(a,b));
+		assertFalse(fd.hasItem(a));
+		assertFalse(fd.hasItem(b));
 	}
 
 }
