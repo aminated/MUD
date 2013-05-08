@@ -286,6 +286,18 @@ public class PlayerDisposition extends Disposition{
 			}
 		};
 		commands.add(oop);
+		CommandParser cmdScore = new CommandParser("score"){
+			public void invoke(){
+				String message = "Stats for: " + owner.getName() +  "\n" +
+						"HP: " + owner.getHp() + "/" + owner.getMaxhp() +
+						"\nAttack: " + owner.getAtkdmg() +
+						"\nMoney: " + owner.getMoney() + "mBTC" +
+						"\nEquipped: " + (owner.equipped == null ? "None" : owner.equipped.getName())  +
+						"\nItems: " + owner.getItems().size();
+				listener.puts(message + "\n");
+			}
+		};
+		commands.add(cmdScore);
 		CommandParser cmdShutdown = new CommandParser("shutdown"){
 			public void invoke(){
 				Player sender = (Player) owner;
@@ -314,7 +326,8 @@ public class PlayerDisposition extends Disposition{
 						"give <item> to <creature>: Offer someone an item, or give it to someone who asked. \n" +
 						"equip <weapon>: Use an item by default to attack \n" +
 						"attack <creature>: Attack someone with your equipped item. \n" +
-						"oop <message>: Send an out-of-game message to all players connected \n";
+						"oop <message>: Send an out-of-game message to all players connected \n" +
+						"score: Displays statistics about your character \n";
 			}
 		};
 	}

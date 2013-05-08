@@ -148,7 +148,7 @@ public class Server extends Thread {
 				}
 			
 				try {
-					name = (String) istream.readObject();
+					password = (String) istream.readObject();
 				} catch (ClassNotFoundException e) {
 					System.out.print("Class not found");
 				} catch (IOException e) {
@@ -211,6 +211,7 @@ public class Server extends Thread {
 
 			// Adding a Player to use as a test
 			Player test = new Player("TEST", "password", 1, 1, 1);
+			Player admin = new Player("admin", "root", 10000, 10000, 10000);
 			test.setRoom(roomDB.get(1));
 			players.add(test);
 
