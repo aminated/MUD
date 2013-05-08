@@ -199,11 +199,11 @@ public class ItemTest {
 		Item a = new Hammer();
 		Item b = new Wood();
 		Living fd = new Player("Otacon", "", 100, 100, 0);
-		assertEquals("Fail to merge!",a.useItem(fd,b));
+		assertEquals("",a.useItem(fd,b));
 		fd.addItem(a);
-		assertEquals("Fail to merge!",fd.useItem(a,b));
+		assertEquals("",a.useItem(fd,b));
 		fd.addItem(b);
-		assertEquals("Success to merge!",fd.useItem(a,b));
+		assertEquals("",a.useItem(fd,b));
 		assertFalse(fd.hasItem(a));
 		assertFalse(fd.hasItem(b));
 	}

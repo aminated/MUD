@@ -18,7 +18,20 @@ public class Hammer extends Weapon {
 		usetime = 30;
 		value = 50;
 	}
-	
+	public String useItem(Living source, Item tool) {
+		// TODO Auto-generated method stub
+		if(source.hasItem(this)&&tool instanceof Wood){
+			Wood wood = (Wood) tool;
+			if(source.hasItem(wood)){
+				source.removeItem(this);
+				source.removeItem(wood);
+				source.addItem(new Sledgehammer());
+				source.sendMessage("Merge complete.");
+				return "";
+			}
+		}
+		return "";
+	}
 	}
 
 	
