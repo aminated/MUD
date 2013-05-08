@@ -24,12 +24,7 @@ public class PlayerDisposition extends Disposition{
 		public ObjectOutputStream ostream;
 		public void run(){
 			while(true){
-				try {
-					ostream.writeObject(">");
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+
 				String command = "";
 				try {
 					command = (String) istream.readObject();
@@ -148,10 +143,25 @@ public class PlayerDisposition extends Disposition{
 		commands.add(cmdLook);
 		CommandParser cmdUse = new CommandParser("use"){
 			public void invoke(){
-				// Pass off to Action
-				// TODO: Handle different types of "use" so we don't parse things twice. 
-				// Leave that for refactoring.
-				queue.add(new Action(owner, command));
+				int i = 1;
+				Targetable entity;
+				Item tool = null;
+				if(args.length > 2){
+					tool = owner.getItem(args[1]);
+					i = 2;
+				}
+				try{
+				entity = owner.getRoom().getByName(args[i]);
+				}
+				catch (InvalidNameException e){
+				entity = owner.getItem(args[i]);
+				}
+				if(i==2)
+				addAction(new Action(owner, entity, tool));
+				else
+				addAction(new Action(owner, entity));
+				
+
 			}
 		};
 		commands.add(cmdUse);
