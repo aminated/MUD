@@ -171,7 +171,10 @@ public class PlayerDisposition extends Disposition{
 			}
 		};
 		commands.add(cmdTell);
-				
+		
+		CommandParser cmdDrop = new CommandParser(){
+			public String regex = "drop";
+		}
 	}
 	public PlayerDisposition(Socket client, Player player){
 		super(player);

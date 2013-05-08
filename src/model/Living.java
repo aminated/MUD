@@ -65,6 +65,13 @@ public abstract class Living implements Targetable, Serializable{
 	public void removeItem(Item item){
 		items.remove(item);
 	}
+	public Item getItem(String itemName){
+		for(Item item : items){
+			if(item.getName().toLowerCase().equals(itemName.toLowerCase()))
+				return item;
+		}
+		return null;
+	}
 	public boolean hasItem(Item item){
 		return items.contains(item);
 	}
